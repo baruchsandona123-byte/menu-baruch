@@ -29,6 +29,7 @@
             padding: 2rem 3rem;
             display: inline-block;
             background: rgba(255, 255, 255, 0.03);
+            text-align: center;
         }
 
         .brand-name { font-size: 4.5rem; line-height: 1; margin-bottom: 0.2rem; }
@@ -42,6 +43,7 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+            height: 100%;
         }
 
         .menu-card:hover {
@@ -86,53 +88,19 @@
             transition: all 0.2s;
             white-space: nowrap;
             background: rgba(255,255,255,0.03);
+            display: inline-block;
         }
         .nav-item:hover {
             background: var(--brand-red);
             border-color: var(--brand-red);
             color: white;
         }
-
-        .ai-input {
-            background: rgba(0, 0, 0, 0.3);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            color: white;
-            padding: 1rem 1.5rem;
-            width: 100%;
-            font-size: 0.8rem;
-            letter-spacing: 0.05em;
-        }
-
-        .ai-input:focus {
-            outline: none;
-            border-color: var(--brand-red);
-            background: rgba(0, 0, 0, 0.5);
-        }
-
-        .ai-btn {
-            background: transparent;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            color: white;
-            padding: 1rem 2rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            font-size: 0.7rem;
-            letter-spacing: 0.1em;
-            transition: all 0.3s;
-        }
-
-        .ai-btn:hover:not(:disabled) {
-            background: var(--brand-red);
-            border-color: var(--brand-red);
-        }
-
-        .ai-btn:disabled { opacity: 0.5; cursor: not-allowed; }
     </style>
 </head>
 <body class="pb-20">
 
-    <!-- Header -->
-    <header class="relative h-80 flex items-center justify-center text-center overflow-hidden border-b-8 border-brand-teal bg-[#080808]">
+    <!-- Header / Logo Principal -->
+    <header class="relative h-96 flex flex-col items-center justify-center text-center overflow-hidden border-b-8 border-brand-teal bg-[#080808]">
         <div class="relative z-20 px-4">
             <div class="logo-box">
                 <h1 class="font-brand brand-name">BARUCH</h1>
@@ -143,10 +111,11 @@
                 </div>
                 <div class="brand-stars text-brand-red">★★★★</div>
             </div>
+            <p class="mt-6 text-[10px] tracking-[0.6em] opacity-40 uppercase font-bold text-brand-teal">Sandoná - Nariño</p>
         </div>
     </header>
 
-    <!-- Navigation Scrollable (11 Categorías) -->
+    <!-- Navigation Scrollable (Las 11 Categorías) -->
     <nav class="sticky top-0 z-50 nav-blur border-b border-brand-red/30 py-4 overflow-x-auto scrollbar-hide">
         <div class="flex space-x-2 px-4 max-w-7xl mx-auto">
             <a href="#hamburguesas" class="nav-item">Hamburguesas</a>
@@ -160,40 +129,35 @@
             <a href="#picadas" class="nav-item">Picadas</a>
             <a href="#costillas" class="nav-item">Costillas</a>
             <a href="#pataches" class="nav-item">Pataches</a>
-            <a href="#bebidas" class="nav-item bg-brand-red border-brand-red text-white font-bold">Bebidas</a>
+            <a href="#bebidas" class="nav-item bg-brand-red border-brand-red text-white">Bebidas</a>
         </div>
     </nav>
 
     <main class="max-w-6xl mx-auto px-4 mt-16 space-y-24">
 
         <!-- ASISTENTE IA CORREGIDO -->
-        <section id="ai-assistant" class="ai-panel p-8 md:p-12 shadow-2xl rounded-sm">
-            <div class="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-10">
+        <section id="ai-assistant" class="ai-panel p-8 md:p-12 shadow-2xl rounded-none">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-6">
                 <div class="flex-1">
                     <div class="flex items-center gap-4 mb-2">
                         <span class="text-3xl">✨</span>
-                        <h2 class="font-brand text-3xl tracking-tighter">Asistente de Sabor Baruch</h2>
+                        <h2 class="font-brand text-3xl tracking-tighter">Asistente Baruch AI</h2>
                     </div>
-                    <p class="text-[10px] text-gray-200 uppercase tracking-[0.2em] font-semibold opacity-80">Dinos qué se te antoja y te sugerimos el combo ideal</p>
-                </div>
-                <div class="hidden md:block">
-                    <div class="p-3 border border-white/20 rounded-lg">
-                        <svg class="w-8 h-8 text-white opacity-40" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
-                    </div>
+                    <p class="text-[10px] text-gray-200 uppercase tracking-[0.2em] font-semibold opacity-80">Recomendaciones del chef según tu antojo</p>
                 </div>
             </div>
 
-            <div class="flex flex-col md:flex-row gap-0 border border-white/10 overflow-hidden">
-                <input type="text" id="user-mood" placeholder="TENGO MUCHA HAMBRE Y QUIERO ALGO ESPECIAL..." 
-                       class="ai-input uppercase tracking-widest">
-                <button onclick="getAIRecommendation()" id="ai-btn" class="ai-btn">
+            <div class="mt-10 flex flex-col md:flex-row border border-white/10">
+                <input type="text" id="user-mood" placeholder="¿QUÉ SE TE ANTOJA HOY?" 
+                       class="flex-1 p-6 bg-black/40 text-white text-xs uppercase tracking-widest focus:outline-none focus:bg-black/60 transition">
+                <button onclick="getAIRecommendation()" id="ai-btn" class="bg-brand-teal px-12 py-6 font-bold uppercase text-[10px] tracking-widest hover:bg-brand-red transition text-white">
                     Consultar ✨
                 </button>
             </div>
 
             <div id="ai-loading" class="mt-8 hidden flex items-center space-x-4">
                 <div class="animate-spin h-5 w-5 border-2 border-brand-red border-t-transparent rounded-full"></div>
-                <span class="text-[10px] uppercase tracking-[0.3em] text-brand-red font-bold">El chef virtual está diseñando tu pedido...</span>
+                <span class="text-[10px] uppercase tracking-[0.3em] text-brand-red font-bold">Analizando ingredientes...</span>
             </div>
 
             <div id="ai-response" class="mt-10 hidden p-8 bg-black/50 border-l-4 border-brand-red">
@@ -204,20 +168,23 @@
         <!-- 1. Hamburguesas -->
         <section id="hamburguesas">
             <div class="section-header"><h2 class="font-brand text-4xl">Hamburguesas</h2></div>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 <div class="menu-card p-8"><div><h3 class="font-bold text-xs uppercase mb-2">Tradicional</h3><p class="text-[9px] text-gray-500 uppercase">Res / Queso / Vegetales</p></div><span class="price-tag mt-4">$16K</span></div>
-                <div class="menu-card p-8 border-l-4 border-brand-red"><div><h3 class="font-bold text-xs uppercase text-brand-red mb-2">Baruch Especial</h3><p class="text-[9px] text-gray-500 uppercase">Nuestra Insignia</p></div><span class="price-tag mt-4">$24K</span></div>
-                <div class="menu-card p-8"><div><h3 class="font-bold text-xs uppercase mb-2">Artesanal</h3><p class="text-[9px] text-gray-500 uppercase">Pan Brioche / Premium</p></div><span class="price-tag mt-4">$19K</span></div>
+                <div class="menu-card p-8 border-l-4 border-brand-red"><div><h3 class="font-bold text-xs uppercase text-brand-red mb-2">Baruch Especial</h3><p class="text-[9px] text-gray-500 uppercase">Doble Topping / Secreto Casa</p></div><span class="price-tag mt-4">$24K</span></div>
+                <div class="menu-card p-8"><div><h3 class="font-bold text-xs uppercase mb-2">Artesanal / Pollo</h3><p class="text-[9px] text-gray-500 uppercase">Pan Brioche / Premium</p></div><span class="price-tag mt-4">$19K</span></div>
+                <div class="menu-card p-8"><div><h3 class="font-bold text-xs uppercase mb-2">Explosión XXL</h3><p class="text-[9px] text-gray-500 uppercase">Dos Carnes / Extra Queso</p></div><span class="price-tag mt-4">$30K</span></div>
+                <div class="menu-card p-8"><div><h3 class="font-bold text-xs uppercase mb-2">Ranchera</h3><p class="text-[9px] text-gray-500 uppercase">Chorizo / Cebolla Grill</p></div><span class="price-tag mt-4">$22K</span></div>
             </div>
         </section>
 
         <!-- 2. Salchipapas -->
         <section id="salchipapas">
             <div class="section-header"><h2 class="font-brand text-4xl">Salchipapas</h2></div>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 <div class="menu-card p-6 flex justify-between items-center"><span>Grande Tradicional</span> <span class="price-tag">$11K</span></div>
-                <div class="menu-card p-6 border-l-2 border-brand-teal flex justify-between items-center"><span>Ranchera</span> <span class="price-tag">$18K</span></div>
-                <div class="menu-card p-6 border-t-2 border-brand-red flex justify-between items-center"><span class="text-brand-red font-bold">Desgranado</span> <span class="price-tag">$24K</span></div>
+                <div class="menu-card p-6 border-l-2 border-brand-teal flex justify-between items-center"><span>Ranchera / Santarrosana</span> <span class="price-tag">$18K</span></div>
+                <div class="menu-card p-6 border-t-2 border-brand-red flex justify-between items-center font-bold"><span>Desgranado Especial</span> <span class="price-tag text-brand-red">$24K</span></div>
+                <div class="menu-card p-6 flex justify-between items-center"><span>Salchipollo / Salchicarne</span> <span class="price-tag">$20K</span></div>
                 <div class="menu-card p-6 flex justify-between items-center"><span>Supercarnes</span> <span class="price-tag">$22K</span></div>
             </div>
         </section>
@@ -225,19 +192,18 @@
         <!-- 3. Carnes a la Parrilla -->
         <section id="parrilla">
             <div class="section-header"><h2 class="font-brand text-4xl">Carnes Parrilla</h2></div>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div class="menu-card p-8 flex justify-between items-center">
-                    <h3 class="font-bold text-xs uppercase">Res / Cerdo / Pollo</h3>
-                    <span class="price-tag text-2xl">$18K</span>
-                </div>
+            <div class="menu-card p-8 max-w-md flex justify-between items-center">
+                <h3 class="font-bold text-xs uppercase tracking-widest">Res / Cerdo / Pollo</h3>
+                <span class="price-tag text-2xl">$18K</span>
             </div>
         </section>
 
         <!-- 4. Pinchos -->
         <section id="pinchos">
             <div class="section-header"><h2 class="font-brand text-4xl">Pinchos</h2></div>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="menu-card p-6 flex justify-between items-center"><h3>Pinchos Mixtos</h3><span class="price-tag">$10K</span></div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="menu-card p-8 flex justify-between items-center"><h3>Pincho Mixto</h3><span class="price-tag">$10K</span></div>
+                <div class="menu-card p-8 flex justify-between items-center"><h3>Pincho Res / Cerdo</h3><span class="price-tag">$10K</span></div>
             </div>
         </section>
 
@@ -247,16 +213,17 @@
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <div class="menu-card p-6 flex justify-between"><span>Jamón y Queso</span> <span class="price-tag">$6K</span></div>
                 <div class="menu-card p-6 flex justify-between"><span>Hawaiana</span> <span class="price-tag">$8K</span></div>
-                <div class="menu-card p-6 border-l-4 border-brand-red flex justify-between font-bold"><span>Baruch</span> <span class="price-tag">$15K</span></div>
+                <div class="menu-card p-6 border-l-4 border-brand-red flex justify-between font-bold"><span>Arepa Baruch</span> <span class="price-tag">$15K</span></div>
             </div>
         </section>
 
         <!-- 6. Apanados -->
         <section id="apanados">
             <div class="section-header"><h2 class="font-brand text-4xl">Apanados</h2></div>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div class="menu-card p-8 flex justify-between items-center"><h3>Pollo Broster</h3><span class="price-tag">$12K</span></div>
-                <div class="menu-card p-8 flex justify-between items-center"><h3>Alitas BBQ x6</h3><span class="price-tag">$20K</span></div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="menu-card p-6 flex justify-between items-center"><h3>Pollo Broster</h3><span class="price-tag">$12K</span></div>
+                <div class="menu-card p-6 flex justify-between items-center"><h3>Chuleta de Pollo</h3><span class="price-tag">$18K</span></div>
+                <div class="menu-card p-6 flex justify-between items-center border-l-2 border-brand-teal"><h3>Alitas BBQ x6</h3><span class="price-tag">$20K</span></div>
             </div>
         </section>
 
@@ -265,7 +232,7 @@
             <div class="section-header"><h2 class="font-brand text-4xl">Perros Calientes</h2></div>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <div class="menu-card p-8 flex justify-between items-center"><h3>Tradicional</h3><span class="price-tag">$12K</span></div>
-                <div class="menu-card p-8 border-l-4 border-brand-red flex justify-between items-center"><h3>Perra Baruch</h3><span class="price-tag">$25K</span></div>
+                <div class="menu-card p-8 flex justify-between items-center border-l-4 border-brand-red font-bold"><h3>Perra Baruch</h3><span class="price-tag">$25K</span></div>
             </div>
         </section>
 
@@ -275,14 +242,14 @@
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div class="menu-card p-6 flex justify-between"><span>Pollo / Carne</span> <span class="price-tag">$15K</span></div>
                 <div class="menu-card p-6 flex justify-between"><span>Mexicano</span> <span class="price-tag">$17K</span></div>
-                <div class="menu-card p-6 border-l-4 border-brand-teal flex justify-between"><span>Mixto</span> <span class="price-tag">$23K</span></div>
+                <div class="menu-card p-6 border-l-4 border-brand-teal flex justify-between"><span>Sandwis Mixto</span> <span class="price-tag">$23K</span></div>
             </div>
         </section>
 
         <!-- 9. Picadas -->
         <section id="picadas">
             <div class="section-header"><h2 class="font-brand text-4xl">Picadas</h2></div>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center uppercase text-[10px] tracking-widest">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center uppercase tracking-[0.2em] text-[10px]">
                 <div class="menu-card p-10"><h3>Pequeña</h3><p class="price-tag text-3xl mt-4">$35K</p></div>
                 <div class="menu-card p-10 border-2 border-brand-red bg-brand-red/5"><h3>Mediana</h3><p class="price-tag text-3xl mt-4">$70K</p></div>
                 <div class="menu-card p-10"><h3>Familiar</h3><p class="price-tag text-3xl mt-4">$100K</p></div>
@@ -292,9 +259,9 @@
         <!-- 10. Costillas -->
         <section id="costillas">
             <div class="section-header"><h2 class="font-brand text-4xl">Costillas</h2></div>
-            <div class="menu-card p-8 max-w-sm flex justify-between items-center">
-                <h3 class="font-bold uppercase text-xs">BBQ Ahumadas</h3>
-                <span class="price-tag">$20K</span>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="menu-card p-8 flex justify-between items-center"><h3 class="font-bold uppercase text-xs">BBQ Ahumadas</h3><span class="price-tag">$20K</span></div>
+                <div class="menu-card p-8 flex justify-between items-center border-l-2 border-brand-teal"><h3>Caramelizadas</h3><span class="price-tag">$20K</span></div>
             </div>
         </section>
 
@@ -304,6 +271,7 @@
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <div class="menu-card p-6 flex justify-between"><span>Carne / Pollo</span> <span class="price-tag">$12K</span></div>
                 <div class="menu-card p-6 border-l-4 border-brand-red flex justify-between font-bold"><span>Patache Baruch</span> <span class="price-tag">$15K</span></div>
+                <div class="menu-card p-6 flex justify-between"><span>Mixto</span> <span class="price-tag">$23K</span></div>
             </div>
         </section>
 
@@ -326,14 +294,13 @@
                     <h3 class="font-brand text-lg border-b-2 border-brand-red pb-2 uppercase tracking-widest">Calientes</h3>
                     <div class="bg-white/5 p-6 space-y-4 text-[10px] uppercase font-medium">
                         <div class="flex justify-between text-brand-red font-bold"><span>Hervidos Sandoná</span> <b>$5K</b></div>
-                        <div class="flex justify-between"><span>Aromática Frutos</span> <b>$6K</b></div>
-                        <div class="flex justify-between"><span>Milo / Chocolate</span> <b>$7K / $6K</b></div>
+                        <div class="flex justify-between"><span>Chocolate / Milo</span> <b>$6K / $7K</b></div>
                     </div>
                 </div>
                 <div class="space-y-6">
                     <h3 class="font-brand text-lg border-b-2 border-brand-teal pb-2 uppercase tracking-widest">Cervezas</h3>
                     <div class="bg-white/5 p-6 space-y-4 text-[10px] uppercase font-medium">
-                        <div class="flex justify-between"><span>Póker / Club Colombia</span> <b>$5K</b></div>
+                        <div class="flex justify-between"><span>Póker / Club</span> <b>$5K</b></div>
                         <div class="flex justify-between text-brand-red font-bold"><span>Corona</span> <b>$7K</b></div>
                     </div>
                 </div>
@@ -359,8 +326,7 @@
 
     <!-- GEMINI API SCRIPTS -->
     <script>
-        // ATENCIÓN: La API Key está vacía por seguridad.
-        // Para que funcione en tu propia página (GitHub/Local), obtén una en: https://aistudio.google.com/
+        // PEGA TU CLAVE AQUÍ: https://aistudio.google.com/
         const apiKey = "AIzaSyDfI1Fboav04xrcksNaj4kecrLQ0zqEPU0"; 
 
         async function getAIRecommendation() {
@@ -373,35 +339,32 @@
 
             if (!userText.trim()) return;
 
-            // UI State
             loading.classList.remove('hidden');
             responseContainer.classList.add('hidden');
             btn.disabled = true;
 
-            const systemPrompt = `Eres el asistente gastronómico experto del restaurante "Baruch - Food & Drink" en Sandoná, Nariño. 
+            const systemPrompt = `Eres el sommelier virtual experto del restaurante "Baruch - Food & Drink" en Sandoná. 
             Tu misión es recomendar la combinación perfecta basándote en el antojo del cliente.
             MENÚ DISPONIBLE:
-            - Hamburguesas: Tradicional ($16k), Baruch Especial ($24k), Artesanal ($19k).
+            - Hamburguesas: Tradicional ($16k), Baruch Especial ($24k), Artesanal ($19k), Explosión ($30k).
             - Salchipapas: Ranchera ($18k), Desgranado ($24k), Supercarnes ($22k).
             - Parrilla: Res/Cerdo/Pollo ($18k), Pinchos ($10k).
-            - Picadas: Mediana ($70k), Grande ($100k).
+            - Arepas: Arepa Baruch ($15k).
             - Bebidas: Michelada Especial ($10k), Limonada Coco ($8k), Malteada Ron ($13k), Hervidos de Sandoná ($5k).
             REGLAS:
-            1. Tono altamente profesional, elegante, sommelier y muy amable.
-            2. Sugiere siempre UN plato fuerte y UNA bebida del menú que mariden bien.
-            3. Resalta el Hervido como el tesoro tradicional de Nariño si el cliente busca algo cálido.
-            4. Respuesta corta, apetitosa y en español (máx 3 líneas).`;
+            1. Tono altamente profesional, elegante y experto.
+            2. Sugiere siempre UN plato fuerte y UNA bebida del menú.
+            3. Menciona el Hervido como tradición de Nariño si el cliente busca algo tradicional.
+            4. Respuesta en español, apetitosa y corta (máx 3 líneas).`;
 
             const sleep = ms => new Promise(res => setTimeout(res, ms));
 
             const callApi = async (retryCount = 0) => {
+                // Seleccionamos gemini-1.5-flash para mayor compatibilidad con claves estándar.
+                const model = "gemini-1.5-flash"; 
+                
                 try {
-                    // Si no hay API Key y no estamos en el entorno de previsualización, avisar.
-                    if (apiKey === "" && !window.location.hostname.includes('localhost') && !window.location.protocol.includes('file')) {
-                         // Este bloque es solo para evitar errores si olvidas la key en tu server propio.
-                    }
-
-                    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`, {
+                    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`, {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify({
@@ -410,21 +373,24 @@
                         })
                     });
 
-                    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+                    if (!response.ok) {
+                        const errorData = await response.json();
+                        console.error("Error de Google API:", errorData);
+                        throw new Error(`Error HTTP: ${response.status}`);
+                    }
 
                     const result = await response.json();
                     const text = result.candidates?.[0]?.content?.parts?.[0]?.text;
                     
-                    if (!text) throw new Error('No se recibió respuesta del modelo');
+                    if (!text) throw new Error('Respuesta vacía');
 
-                    // Éxito
                     loading.classList.add('hidden');
                     responseContainer.classList.remove('hidden');
                     responseText.textContent = text;
                     btn.disabled = false;
 
                 } catch (error) {
-                    // Exponential backoff (Reintentos)
+                    console.error("Fallo en la consulta:", error);
                     if (retryCount < 5) {
                         const delays = [1000, 2000, 4000, 8000, 16000];
                         await sleep(delays[retryCount]);
@@ -432,7 +398,7 @@
                     } else {
                         loading.classList.add('hidden');
                         btn.disabled = false;
-                        alert("Nuestro chef virtual está ocupado con un pedido grande. ¡Por favor, intenta de nuevo en un momento!");
+                        alert("El asistente está revisando la cocina. ¡Intenta de nuevo en un momento o verifica tu clave de API en la consola!");
                     }
                 }
             };
@@ -440,13 +406,9 @@
             await callApi();
         }
 
-        // Permitir usar Enter para consultar
         document.getElementById('user-mood').addEventListener('keypress', function (e) {
-            if (e.key === 'Enter') {
-                getAIRecommendation();
-            }
+            if (e.key === 'Enter') getAIRecommendation();
         });
     </script>
 </body>
 </html>
-
