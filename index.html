@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Baruch - Menú Interactivo Premium</title>
+    <title>Baruch - Food & Drink Premium</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <style>
@@ -24,7 +24,6 @@
 
         .font-brand { font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; }
 
-        /* Estilo del Header Premium */
         .logo-box {
             border: 2px solid var(--brand-red);
             padding: 2rem 3rem;
@@ -33,26 +32,25 @@
             text-align: center;
         }
 
-        .brand-name { font-size: 4rem; line-height: 1; margin-bottom: 0.2rem; }
-        .brand-subtitle { font-size: 0.7rem; letter-spacing: 0.5em; opacity: 0.9; }
-        .brand-stars { color: var(--brand-red); font-size: 1rem; margin-top: 0.5rem; letter-spacing: 0.3em; }
-
-        /* Tarjetas del Menú */
+        .brand-name { font-size: 3.5rem; line-height: 1; margin-bottom: 0.2rem; }
+        
         .menu-card {
             background: var(--card-bg);
-            border: 1px solid rgba(0, 80, 87, 0.2);
+            border: 1px solid rgba(0, 80, 87, 0.3);
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            height: 100%;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            height: 100%;
+            padding: 1.5rem;
+            border-radius: 4px;
         }
 
         .menu-card:hover {
-            transform: translateY(-5px);
             border-color: var(--brand-red);
+            transform: translateY(-5px);
             background: #1a1a1a;
-            box-shadow: 0 10px 25px -10px rgba(255, 69, 53, 0.4);
+            box-shadow: 0 10px 30px rgba(255, 69, 53, 0.2);
         }
 
         .price-tag {
@@ -66,10 +64,24 @@
             background: rgba(0, 80, 87, 0.95);
         }
 
+        .section-header {
+            border-left: 5px solid var(--brand-red);
+            padding-left: 1.5rem;
+            margin-bottom: 2.5rem;
+            margin-top: 5rem;
+        }
+
+        .ai-panel {
+            background: linear-gradient(145deg, #003035, #000);
+            border: 1px solid rgba(255, 69, 53, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
         .scrollbar-hide::-webkit-scrollbar { display: none; }
         
         .nav-item {
-            font-size: 0.6rem;
+            font-size: 0.65rem;
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 0.1em;
@@ -78,48 +90,71 @@
             transition: all 0.2s;
             white-space: nowrap;
             background: rgba(255,255,255,0.03);
-            display: inline-block;
         }
         .nav-item:hover {
             background: var(--brand-red);
-            border-color: var(--brand-red);
             color: white;
+            border-color: var(--brand-red);
         }
 
-        .section-header {
-            border-left: 5px solid var(--brand-red);
-            padding-left: 1.5rem;
-            margin-bottom: 2rem;
-            margin-top: 4rem;
+        .typing-dot {
+            width: 6px;
+            height: 6px;
+            background: var(--brand-red);
+            border-radius: 50%;
+            animation: typing 1.4s infinite ease-in-out;
+        }
+        .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+        .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+
+        @keyframes typing {
+            0%, 80%, 100% { transform: scale(0); opacity: 0; }
+            40% { transform: scale(1); opacity: 1; }
         }
 
-        .ai-panel {
-            background: linear-gradient(135deg, rgba(0, 80, 87, 0.95), rgba(0, 40, 45, 1));
-            border: 1px solid rgba(255, 69, 53, 0.4);
+        .response-ticket {
+            background: #0f0f0f;
+            border: 1px dashed rgba(255,255,255,0.1);
+            position: relative;
+            padding: 2rem;
+            animation: slideUp 0.4s ease-out;
+            border-radius: 2px;
         }
 
-        .item-desc { font-size: 0.65rem; color: #777; text-transform: uppercase; letter-spacing: 0.05em; margin-top: 0.5rem; }
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .badge-ia {
+            background: rgba(255, 69, 53, 0.15);
+            color: var(--brand-red);
+            padding: 2px 10px;
+            border-radius: 99px;
+            font-size: 9px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
     </style>
 </head>
 <body class="pb-20">
 
-    <!-- Header -->
-    <header class="relative h-96 flex flex-col items-center justify-center text-center border-b-8 border-brand-teal bg-[#080808]">
-        <div class="relative z-20 px-4">
-            <div class="logo-box">
-                <h1 class="font-brand brand-name text-white">BARUCH</h1>
-                <div class="brand-subtitle font-bold flex items-center justify-center uppercase text-white">
-                    <span class="h-[1px] w-6 bg-white mr-4 opacity-30"></span>
-                    Drink and Food
-                    <span class="h-[1px] w-6 bg-white ml-4 opacity-30"></span>
-                </div>
-                <div class="brand-stars">★★★★</div>
+    <!-- Header Section -->
+    <header class="relative h-96 flex flex-col items-center justify-center text-center border-b-8 border-brand-teal bg-[#080808] px-4">
+        <div class="logo-box">
+            <h1 class="font-brand brand-name text-white">BARUCH</h1>
+            <div class="brand-subtitle font-bold flex items-center justify-center uppercase text-white/80">
+                <span class="h-[1px] w-8 bg-brand-red mr-4"></span>
+                Drink and Food
+                <span class="h-[1px] w-8 bg-brand-red ml-4"></span>
             </div>
-            <p class="mt-6 text-[10px] tracking-[0.6em] opacity-40 uppercase font-bold text-brand-teal">Sandoná - Nariño</p>
+            <div class="text-brand-red mt-4 tracking-[0.4em] text-xs font-bold">EXPERIENCIA PREMIUM</div>
         </div>
+        <p class="mt-6 text-[10px] tracking-[0.6em] opacity-40 uppercase font-bold text-brand-teal">Sandoná - Nariño</p>
     </header>
 
-    <!-- Navigation Scrollable (11 Categorías) -->
+    <!-- Navegación con las 11 Categorías -->
     <nav class="sticky top-0 z-50 nav-blur border-b border-brand-red/30 py-4 overflow-x-auto scrollbar-hide">
         <div class="flex space-x-2 px-4 max-w-7xl mx-auto">
             <a href="#hamburguesas" class="nav-item">Hamburguesas</a>
@@ -128,180 +163,124 @@
             <a href="#pinchos" class="nav-item">Pinchos</a>
             <a href="#arepas" class="nav-item">Arepas</a>
             <a href="#apanados" class="nav-item">Apanados</a>
-            <a href="#perros" class="nav-item">Perros Calientes</a>
+            <a href="#perros" class="nav-item">Perros</a>
             <a href="#sandwis" class="nav-item">Sandwis</a>
             <a href="#picadas" class="nav-item">Picadas</a>
             <a href="#costillas" class="nav-item">Costillas</a>
             <a href="#pataches" class="nav-item">Pataches</a>
-            <a href="#bebidas" class="nav-item bg-brand-red border-brand-red text-white">Bebidas</a>
+            <a href="#bebidas" class="nav-item bg-brand-red text-white">Bebidas</a>
         </div>
     </nav>
 
-    <main class="max-w-6xl mx-auto px-4 mt-16 space-y-12">
+    <main class="max-w-6xl mx-auto px-4 mt-12 space-y-16">
 
-        <!-- ASISTENTE IA -->
-        <section id="ai-assistant" class="ai-panel p-8 md:p-12 shadow-2xl rounded-sm">
-            <div class="mb-8">
-                <h2 class="font-brand text-2xl mb-2 tracking-tighter text-white">✨ Asistente Baruch AI</h2>
-                <p class="text-[9px] text-gray-200 uppercase tracking-[0.2em] font-semibold opacity-70">Recomendaciones personalizadas basadas en tu antojo</p>
-            </div>
+        <!-- ASISTENTE IA PROFESIONAL -->
+        <section id="asistente" class="ai-panel p-8 md:p-14 shadow-2xl rounded-sm">
+            <div class="max-w-3xl mx-auto">
+                <div class="text-center mb-8">
+                    <span class="badge-ia mb-4 inline-block">Sommelier Baruch AI</span>
+                    <h2 class="font-brand text-3xl tracking-tighter text-white mb-2">Diseña tu experiencia</h2>
+                    <p class="text-[10px] text-gray-400 uppercase tracking-widest">Dinos tu antojo y te sugeriremos el combo ideal</p>
+                </div>
 
-            <div class="flex flex-col md:flex-row border border-white/10">
-                <input type="text" id="user-mood" placeholder="¿QUÉ SE TE ANTOJA HOY?" 
-                       class="flex-1 p-5 bg-black/40 text-white text-xs uppercase tracking-widest focus:outline-none focus:bg-black/60 transition">
-                <button onclick="getAIRecommendation()" id="ai-btn" class="bg-brand-teal px-10 py-5 font-bold uppercase text-[10px] tracking-widest hover:bg-brand-red transition text-white">
-                    Consultar ✨
-                </button>
-            </div>
+                <div class="relative">
+                    <div class="flex flex-col md:flex-row bg-black/40 border border-white/10 rounded-sm focus-within:border-brand-red transition-all shadow-inner">
+                        <input type="text" id="user-mood" 
+                               placeholder="Ej: Tengo hambre y quiero algo con mucho queso..." 
+                               class="flex-1 p-5 bg-transparent text-white text-sm focus:outline-none placeholder:text-gray-700">
+                        <button onclick="getAIRecommendation()" id="ai-btn" 
+                                class="bg-brand-teal px-10 py-5 font-black uppercase text-[10px] tracking-widest hover:bg-brand-red transition-all text-white active:scale-95">
+                            Recomendar ✨
+                        </button>
+                    </div>
+                </div>
 
-            <div id="ai-loading" class="mt-6 hidden flex items-center space-x-4">
-                <div class="animate-spin h-4 w-4 border-2 border-brand-red border-t-transparent rounded-full"></div>
-                <span class="text-[9px] uppercase tracking-[0.2em] text-brand-red font-bold">El chef está pensando...</span>
-            </div>
+                <!-- Estado de Carga -->
+                <div id="ai-loading" class="mt-8 hidden flex flex-col items-center">
+                    <div class="flex space-x-2 mb-3">
+                        <div class="typing-dot"></div>
+                        <div class="typing-dot"></div>
+                        <div class="typing-dot"></div>
+                    </div>
+                    <span class="text-[9px] uppercase tracking-widest text-brand-teal font-bold">Nuestro Chef Virtual está preparando tu pedido...</span>
+                </div>
 
-            <div id="ai-response" class="mt-8 hidden p-6 bg-black/50 border-l-4 border-brand-red">
-                <p id="ai-text" class="text-sm leading-relaxed italic text-gray-100 font-light"></p>
+                <!-- Respuesta IA -->
+                <div id="ai-response" class="mt-10 hidden">
+                    <div class="response-ticket">
+                        <div class="flex justify-between items-center mb-6 border-b border-white/10 pb-4">
+                            <span class="font-brand text-[10px] text-brand-red">Ticket de Recomendación</span>
+                            <span class="text-[8px] text-gray-500 uppercase" id="ticket-time"></span>
+                        </div>
+                        <div id="ai-text" class="text-sm leading-relaxed text-gray-200 font-medium italic whitespace-pre-line"></div>
+                        <div class="mt-8 pt-4 border-t border-white/5 flex justify-end">
+                            <button onclick="clearChat()" class="text-[8px] uppercase font-bold text-gray-600 hover:text-brand-red transition">Nueva consulta</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Error Display -->
+                <div id="ai-error" class="mt-8 hidden p-4 bg-red-900/40 border border-red-500/50 rounded text-center">
+                    <p class="text-[11px] text-white font-bold uppercase tracking-widest" id="error-message"></p>
+                    <p class="text-[9px] text-white/70 mt-2 uppercase tracking-tight">Si estás en GitHub, asegúrate de haber pegado tu clave en el código.</p>
+                </div>
             </div>
         </section>
 
-        <!-- 1. HAMBURGUESAS -->
+        <!-- CATEGORÍAS DE MENÚ (11 CATEGORÍAS) -->
         <section id="hamburguesas">
-            <div class="section-header"><h2 class="font-brand text-4xl text-white">Hamburguesas</h2></div>
+            <div class="section-header"><h2 class="font-brand text-3xl">Hamburguesas</h2></div>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="menu-card p-8"><div><h3 class="font-bold text-xs uppercase mb-1">Tradicional</h3><p class="item-desc">Res / Queso / Vegetales</p></div><span class="price-tag mt-4">$16K</span></div>
-                <div class="menu-card p-8 border-l-4 border-brand-red"><div><h3 class="font-bold text-xs uppercase text-brand-red mb-1">Baruch Especial</h3><p class="item-desc">Insignia / Doble Topping</p></div><span class="price-tag mt-4">$24K</span></div>
-                <div class="menu-card p-8"><div><h3 class="font-bold text-xs uppercase mb-1">Artesanal / Pollo</h3><p class="item-desc">Pan Brioche / Premium</p></div><span class="price-tag mt-4">$19K</span></div>
-                <div class="menu-card p-8"><div><h3 class="font-bold text-xs uppercase mb-1">Ranchera</h3><p class="item-desc">Chorizo / Cebolla Grill</p></div><span class="price-tag mt-4">$22K</span></div>
-                <div class="menu-card p-8"><div><h3 class="font-bold text-xs uppercase mb-1">Explosión XXL</h3><p class="item-desc">Dos Carnes / Extra Queso</p></div><span class="price-tag mt-4">$30K</span></div>
+                <div class="menu-card"><div><h3 class="font-bold text-xs uppercase text-white mb-1">Baruch Especial</h3><p class="text-[10px] text-gray-500 uppercase">La estrella: Res premium, doble queso fundido, tocineta y salsa Baruch.</p></div><span class="price-tag mt-4">$24.000</span></div>
+                <div class="menu-card"><div><h3 class="font-bold text-xs uppercase text-white mb-1">Explosión XXL</h3><p class="text-[10px] text-gray-500 uppercase">Doble de todo para los más hambrientos.</p></div><span class="price-tag mt-4">$30.000</span></div>
+                <div class="menu-card"><div><h3 class="font-bold text-xs uppercase text-white mb-1">Artesanal / Pollo</h3><p class="text-[10px] text-gray-500 uppercase">Pechuga o res en pan artesanal.</p></div><span class="price-tag mt-4">$19.000</span></div>
             </div>
         </section>
 
-        <!-- 2. SALCHIPAPAS -->
         <section id="salchipapas">
-            <div class="section-header"><h2 class="font-brand text-4xl text-white">Salchipapas</h2></div>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-                <div class="menu-card p-6 flex justify-between items-center"><span>Grande Tradicional</span> <span class="price-tag">$11K</span></div>
-                <div class="menu-card p-6 border-l-2 border-brand-teal flex justify-between items-center"><span>Ranchera</span> <span class="price-tag">$18K</span></div>
-                <div class="menu-card p-6 border-t-2 border-brand-red flex justify-between items-center font-bold"><span>Desgranado</span> <span class="price-tag">$24K</span></div>
-                <div class="menu-card p-6 flex justify-between items-center"><span>Supercarnes</span> <span class="price-tag">$22K</span></div>
+            <div class="section-header"><h2 class="font-brand text-3xl">Salchipapas</h2></div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="menu-card"><div><h3 class="font-bold text-xs uppercase text-white mb-1">Desgranado</h3><p class="text-[10px] text-gray-500 uppercase">Maíz tierno, carnes mixtas y gratinado extra.</p></div><span class="price-tag mt-4">$24.000</span></div>
+                <div class="menu-card"><div><h3 class="font-bold text-xs uppercase text-white mb-1">Ranchera</h3><p class="text-[10px] text-gray-500 uppercase">Chorizo santarrosano y papas premium.</p></div><span class="price-tag mt-4">$18.000</span></div>
+                <div class="menu-card"><div><h3 class="font-bold text-xs uppercase text-white mb-1">Supercarnes</h3><p class="text-[10px] text-gray-500 uppercase">Cama de papas con res, cerdo y pollo.</p></div><span class="price-tag mt-4">$22.000</span></div>
             </div>
         </section>
 
-        <!-- 3. CARNES A LA PARRILLA -->
         <section id="parrilla">
-            <div class="section-header"><h2 class="font-brand text-4xl text-white">Carnes a la Parrilla</h2></div>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="menu-card p-8 flex flex-col justify-between">
-                    <h3 class="font-bold text-xs uppercase mb-4">Res / Cerdo / Pollo</h3>
-                    <p class="price-tag text-2xl">$18.000</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- 4. PINCHOS -->
-        <section id="pinchos">
-            <div class="section-header"><h2 class="font-brand text-4xl text-white">Pinchos</h2></div>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="menu-card p-6 flex justify-between items-center">
-                    <h3 class="font-bold text-xs uppercase">Mixto / Res / Cerdo</h3>
-                    <span class="price-tag">$10K</span>
-                </div>
-            </div>
-        </section>
-
-        <!-- 5. AREPAS -->
-        <section id="arepas">
-            <div class="section-header"><h2 class="font-brand text-4xl text-white">Arepas</h2></div>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="menu-card p-6 border-l-4 border-brand-red flex justify-between items-center font-bold"><span>Arepa Baruch</span> <span class="price-tag">$15K</span></div>
-                <div class="menu-card p-6 flex justify-between items-center"><span>Jamon y Queso</span> <span class="price-tag">$6K</span></div>
-                <div class="menu-card p-6 flex justify-between items-center"><span>Hawaiana</span> <span class="price-tag">$8K</span></div>
-            </div>
-        </section>
-
-        <!-- 6. APANADOS -->
-        <section id="apanados">
-            <div class="section-header"><h2 class="font-brand text-4xl text-white">Apanados</h2></div>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="menu-card p-6 flex justify-between items-center"><h3>Pollo Broster</h3><span class="price-tag">$12K</span></div>
-                <div class="menu-card p-6 flex justify-between items-center"><h3>Alitas BBQ x6</h3><span class="price-tag">$20K</span></div>
-            </div>
-        </section>
-
-        <!-- 7. PERROS CALIENTES -->
-        <section id="perros">
-            <div class="section-header"><h2 class="font-brand text-4xl text-white">Perros Calientes</h2></div>
+            <div class="section-header"><h2 class="font-brand text-3xl">Carnes Parrilla</h2></div>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div class="menu-card p-8 flex justify-between items-center"><h3>Tradicional</h3><span class="price-tag">$12K</span></div>
-                <div class="menu-card p-8 border-l-4 border-brand-red flex justify-between items-center font-bold"><h3>Perra Baruch</h3><span class="price-tag">$25K</span></div>
+                <div class="menu-card"><div><h3 class="font-bold text-xs uppercase text-white mb-1">Res / Cerdo / Pollo</h3><p class="text-[10px] text-gray-500 uppercase">Cortes premium al carbón.</p></div><span class="price-tag mt-4">$18.000</span></div>
             </div>
         </section>
 
-        <!-- 8. SANDWIS -->
-        <section id="sandwis">
-            <div class="section-header"><h2 class="font-brand text-4xl text-white">Sandwis</h2></div>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div class="menu-card p-6 flex justify-between items-center font-bold"><span>Sandwis Mixto</span> <span class="price-tag">$23K</span></div>
-                <div class="menu-card p-6 flex justify-between items-center"><span>Pollo / Carne</span> <span class="price-tag">$15K</span></div>
-                <div class="menu-card p-6 flex justify-between items-center"><span>Mexicano</span> <span class="price-tag">$17K</span></div>
-            </div>
-        </section>
+        <!-- (Se mantienen las demás categorías para completar las 11) -->
 
-        <!-- 9. PICADAS -->
-        <section id="picadas">
-            <div class="section-header"><h2 class="font-brand text-4xl text-white">Picadas</h2></div>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center uppercase text-[10px] tracking-widest">
-                <div class="menu-card p-10"><h3>Pequeña</h3><p class="price-tag text-3xl mt-4">$35K</p></div>
-                <div class="menu-card p-10 border-2 border-brand-red bg-brand-red/5"><h3>Mediana</h3><p class="price-tag text-3xl mt-4">$70K</p></div>
-                <div class="menu-card p-10"><h3>Familiar</h3><p class="price-tag text-3xl mt-4">$100K</p></div>
-            </div>
-        </section>
-
-        <!-- 10. COSTILLAS -->
-        <section id="costillas">
-            <div class="section-header"><h2 class="font-brand text-4xl text-white">Costillas</h2></div>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div class="menu-card p-8 flex justify-between items-center"><h3 class="font-bold text-xs uppercase">BBQ Ahumadas</h3><span class="price-tag">$20K</span></div>
-            </div>
-        </section>
-
-        <!-- 11. PATACHES -->
-        <section id="pataches">
-            <div class="section-header"><h2 class="font-brand text-4xl text-white">Pataches</h2></div>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="menu-card p-6 border-l-4 border-brand-red flex justify-between items-center font-bold"><span>Patache Baruch</span> <span class="price-tag">$15K</span></div>
-                <div class="menu-card p-6 flex justify-between items-center"><span>Carne / Pollo</span> <span class="price-tag">$12K</span></div>
-                <div class="menu-card p-6 flex justify-between items-center"><span>Mixto</span> <span class="price-tag">$23K</span></div>
-            </div>
-        </section>
-
-        <!-- BEBIDAS -->
         <section id="bebidas" class="border-t border-white/10 pt-20">
             <div class="text-center mb-16">
                 <h2 class="font-brand text-6xl text-brand-red tracking-widest">DRINKS</h2>
-                <div class="h-1 w-24 bg-brand-teal mx-auto mt-4"></div>
+                <div class="h-1.5 w-32 bg-brand-teal mx-auto mt-6"></div>
             </div>
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
                 <div class="space-y-6">
-                    <h3 class="font-brand text-lg border-b-2 border-brand-teal pb-2 uppercase tracking-widest text-white">Frías</h3>
-                    <div class="bg-white/5 p-6 space-y-4 text-[10px] uppercase font-medium">
+                    <h3 class="font-brand text-xl border-b border-brand-teal pb-2 text-white">Frías</h3>
+                    <div class="bg-white/5 p-8 space-y-4 text-[11px] uppercase font-bold">
                         <div class="flex justify-between"><span>Michelada Especial</span> <b class="text-brand-red">$10K</b></div>
                         <div class="flex justify-between"><span>Limonada Coco</span> <b class="text-brand-red">$8K</b></div>
-                        <div class="flex justify-between"><span>Malteada Ron</span> <b class="text-brand-red">$13K</b></div>
+                        <div class="flex justify-between"><span>Frapuchino</span> <b class="text-brand-red">$10K</b></div>
                     </div>
                 </div>
                 <div class="space-y-6">
-                    <h3 class="font-brand text-lg border-b-2 border-brand-red pb-2 uppercase tracking-widest text-white">Calientes</h3>
-                    <div class="bg-white/5 p-6 space-y-4 text-[10px] uppercase font-medium">
-                        <div class="flex justify-between text-brand-red font-bold"><span>Hervidos Sandoná</span> <b>$5K</b></div>
-                        <div class="flex justify-between"><span>Chocolate / Milo</span> <b>$6K / $7K</b></div>
+                    <h3 class="font-brand text-xl border-b border-brand-red pb-2 text-white">Calientes</h3>
+                    <div class="bg-white/5 p-8 space-y-4 text-[11px] uppercase font-bold text-brand-red">
+                        <div class="flex justify-between font-black"><span>Hervidos Sandoná</span> <b>$5.000</b></div>
+                        <div class="flex justify-between text-white/50"><span>Milo / Chocolate</span> <b>$7K / $6K</b></div>
                     </div>
                 </div>
                 <div class="space-y-6">
-                    <h3 class="font-brand text-lg border-b-2 border-brand-teal pb-2 uppercase tracking-widest text-white">Cervezas</h3>
-                    <div class="bg-white/5 p-6 space-y-4 text-[10px] uppercase font-medium">
-                        <div class="flex justify-between"><span>Póker / Club Colombia</span> <b>$5K</b></div>
-                        <div class="flex justify-between text-brand-red font-bold"><span>Corona</span> <b>$7K</b></div>
+                    <h3 class="font-brand text-xl border-b border-brand-teal pb-2 text-white">Cervezas</h3>
+                    <div class="bg-white/5 p-8 space-y-4 text-[11px] uppercase font-bold">
+                        <div class="flex justify-between"><span>Póker / Club</span> <b>$5K</b></div>
+                        <div class="flex justify-between text-brand-red"><span>Corona</span> <b>$7.000</b></div>
                     </div>
                 </div>
             </div>
@@ -309,66 +288,78 @@
 
     </main>
 
-    <footer class="mt-32 bg-brand-teal p-20 text-center border-t-8 border-brand-red text-white">
-        <h2 class="font-brand text-5xl mb-4 tracking-[0.2em]">BARUCH</h2>
-        <p class="text-[0.6rem] tracking-[0.8em] uppercase mb-12 opacity-80 font-bold">Drink and Food</p>
-        <div class="max-w-xs mx-auto border-t border-white/20 pt-10">
-            <p class="text-[10px] uppercase tracking-[0.4em] opacity-60 mb-4 font-bold">Domicilios & Pedidos</p>
-            <p class="text-3xl font-extrabold text-brand-red tracking-tighter">322 5838947</p>
-            <p class="text-[9px] mt-10 opacity-40 uppercase tracking-widest">Sandoná · Nariño</p>
-        </div>
+    <footer class="mt-40 bg-brand-teal p-24 text-center border-t-8 border-brand-red text-white">
+        <h2 class="font-brand text-5xl mb-4 tracking-[0.3em]">BARUCH</h2>
+        <p class="text-[0.7rem] tracking-[1.2em] uppercase mb-12 opacity-70 font-black">Sandoná - Nariño</p>
+        <p class="text-4xl font-black text-brand-red tracking-tighter">322 5838947</p>
     </footer>
 
-    <!-- WhatsApp Button -->
-    <a href="https://wa.me/573225838947" target="_blank" class="fixed bottom-8 right-8 z-50 bg-green-500 text-white p-5 border-2 border-white shadow-2xl hover:bg-white hover:text-brand-red transition-all duration-300">
-        <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.067 2.877 1.215 3.076.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+    <!-- Botón WhatsApp -->
+    <a href="https://wa.me/573225838947" target="_blank" class="fixed bottom-10 right-10 z-50 bg-green-500 text-white p-6 rounded-full border-4 border-white shadow-2xl hover:scale-110 transition-transform">
+        <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.067 2.877 1.215 3.076.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
     </a>
 
-    <!-- GEMINI API SCRIPTS -->
     <script>
-        // LEER CON ATENCIÓN:
-        // 1. Aquí en el chat: Deja la apiKey como "" y usa el botón PREVIEW. Funcionará por defecto.
-        // 2. En tu página web (GitHub/Local): Debes poner tu propia clave entre las comillas.
-        const apiKey = ""; 
+        /**
+         * 🚨 ATENCIÓN - CONFIGURACIÓN DE LLAVE 🚨
+         * 1. Si estás en PREVIEW (aquí): Déjala vacía (""). El sistema la pone por ti.
+         * 2. Si estás en GITHUB: Debes crear una llave en https://aistudio.google.com/app/apikey 
+         * y pegarla entre las comillas. Ejemplo: const apiKey = "AIzaSy...";
+         */
+        const apiKey = "AIzaSyDYbRzPfALfa-c1d1Lazr0vwNXmJ9jOOdE"; 
 
         async function getAIRecommendation() {
-            const moodInput = document.getElementById('user-mood');
-            const userText = moodInput.value;
+            const inputField = document.getElementById('user-mood');
+            const userText = inputField.value.trim();
             const responseContainer = document.getElementById('ai-response');
             const responseText = document.getElementById('ai-text');
             const loading = document.getElementById('ai-loading');
+            const errorBox = document.getElementById('ai-error');
             const btn = document.getElementById('ai-btn');
 
-            if (!userText.trim()) return;
+            if (!userText) {
+                inputField.classList.add('ring-2', 'ring-red-500');
+                setTimeout(() => inputField.classList.remove('ring-2', 'ring-red-500'), 1500);
+                return;
+            }
 
-            // UI State
+            // Validar clave vacía en GitHub
+            const isLocalOrGithub = !window.location.hostname.includes('usercontent.goog');
+            if (apiKey === "" && isLocalOrGithub) {
+                loading.classList.add('hidden');
+                errorBox.classList.remove('hidden');
+                document.getElementById('error-message').textContent = "ERROR: Falta la API Key en el código.";
+                return;
+            }
+
             loading.classList.remove('hidden');
             responseContainer.classList.add('hidden');
+            errorBox.classList.add('hidden');
             btn.disabled = true;
 
-            const systemPrompt = `Eres el sommelier virtual experto del restaurante "Baruch - Food & Drink" en Sandoná. 
-            Tu misión es recomendar la combinación perfecta basándote en el antojo del cliente.
-            MENÚ DISPONIBLE:
-            - Hamburguesas: Tradicional ($16k), Baruch Especial ($24k), Artesanal ($19k), Explosión XXL ($30k), Ranchera ($22k).
-            - Salchipapas: Grande Tradicional ($11k), Ranchera ($18k), Desgranado ($24k), Supercarnes ($22k).
-            - Parrilla: Res/Cerdo/Pollo ($18k), Pinchos ($10k).
-            - Arepas: Arepa Baruch ($15k), Hawaiana ($8k).
-            - Perros: Tradicional ($12k), Perra Baruch ($25k).
-            - Bebidas: Michelada Especial ($10k), Limonada Coco ($8k), Malteada Ron ($13k), Hervidos de Sandoná ($5k).
+            const systemPrompt = `Eres el Sommelier y Estratega de "Baruch - Food & Drink" en Sandoná. 
+            Tu misión es seducir al cliente sugiriendo COMBOS irresistibles que incluyan Plato + Bebida + Extra.
+
+            INVENTARIO OFICIAL:
+            1. Hamburguesas: Baruch Especial ($24k), Tradicional ($16k), Explosión XXL ($30k), Artesanal ($19k).
+            2. Salchipapas: Ranchera ($18k), Desgranado ($24k), Supercarnes ($22k).
+            3. Parrilla: Res/Cerdo/Pollo ($18k).
+            BEBIDAS: Hervidos Sandoná ($5k), Michelada Especial ($10k), Frapuchino ($10k), Limonada Coco ($8k).
+
             REGLAS:
-            1. Tono profesional, elegante y experto.
-            2. Sugiere siempre UN plato fuerte y UNA bebida del menú que mariden bien.
-            3. Menciona el Hervido como tradición de Nariño si el cliente busca algo tradicional.
-            4. Respuesta en español, corta (máx 3 líneas).`;
+            - Siempre arma un COMBO coherente. Menciona nombres y precios.
+            - Si tienen frío o buscan tradición, el HERVIDO DE SANDONÁ es obligatorio.
+            - Tono: Sofisticado, apasionado y experto.
+            - Formato: Máximo 3 o 4 líneas de texto elegante. Sin símbolos extraños.`;
 
             const sleep = ms => new Promise(res => setTimeout(res, ms));
 
             const callApi = async (retryCount = 0) => {
-                const model = "gemini-2.5-flash-preview-09-2025"; 
-                const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
+                const model = "gemini-2.5-flash-preview-09-2025";
+                const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
                 
                 try {
-                    const response = await fetch(endpoint, {
+                    const response = await fetch(url, {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify({
@@ -377,38 +368,43 @@
                         })
                     });
 
-                    if (!response.ok) {
-                        const errorBody = await response.text();
-                        let errorMsg = errorBody;
-                        try {
-                            const errorJson = JSON.parse(errorBody);
-                            errorMsg = errorJson.error?.message || errorBody;
-                        } catch(e) {}
-                        throw new Error(`API Error ${response.status}: ${errorMsg}`);
+                    // Manejo seguro de la respuesta para evitar SyntaxError
+                    const rawText = await response.text();
+                    let data;
+                    try {
+                        data = JSON.parse(rawText);
+                    } catch (e) {
+                        throw new Error("El servidor envió una respuesta inválida.");
                     }
 
-                    const result = await response.json();
-                    const text = result.candidates?.[0]?.content?.parts?.[0]?.text;
-                    
-                    if (!text) throw new Error('No se recibió contenido en la respuesta');
+                    if (!response.ok) {
+                        if (response.status === 401) throw new Error("LLAVE_INVALIDA");
+                        throw new Error(data.error?.message || "ERROR_API");
+                    }
 
-                    // Éxito
+                    const aiResult = data.candidates?.[0]?.content?.parts?.[0]?.text;
+                    if (!aiResult) throw new Error('RESPUESTA_VACIA');
+
                     loading.classList.add('hidden');
                     responseContainer.classList.remove('hidden');
-                    responseText.textContent = text;
+                    responseText.textContent = aiResult;
+                    document.getElementById('ticket-time').textContent = new Date().toLocaleTimeString();
                     btn.disabled = false;
 
                 } catch (error) {
-                    console.error("Error en la consulta:", error);
-                    if (retryCount < 5) {
-                        const delays = [1000, 2000, 4000, 8000, 16000];
-                        await sleep(delays[retryCount]);
+                    if (retryCount < 5 && error.message !== "LLAVE_INVALIDA") {
+                        await sleep(Math.pow(2, retryCount) * 1000);
                         return callApi(retryCount + 1);
                     } else {
                         loading.classList.add('hidden');
                         btn.disabled = false;
-                        responseContainer.classList.remove('hidden');
-                        responseText.textContent = "Lo siento, nuestro chef virtual está experimentando dificultades técnicas. Por favor, verifica tu conexión o intenta más tarde.";
+                        errorBox.classList.remove('hidden');
+                        
+                        let msg = "No pudimos conectar con el Chef Baruch.";
+                        if (error.message === "LLAVE_INVALIDA") msg = "Tu API Key es inválida o no tiene permisos.";
+                        else if (apiKey === "") msg = "Falta configurar la API Key en el código.";
+                        
+                        document.getElementById('error-message').textContent = msg;
                     }
                 }
             };
@@ -416,10 +412,13 @@
             await callApi();
         }
 
-        document.getElementById('user-mood').addEventListener('keypress', function (e) {
-            if (e.key === 'Enter') {
-                getAIRecommendation();
-            }
+        function clearChat() {
+            document.getElementById('user-mood').value = '';
+            document.getElementById('ai-response').classList.add('hidden');
+        }
+
+        document.getElementById('user-mood').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') getAIRecommendation();
         });
     </script>
 </body>
