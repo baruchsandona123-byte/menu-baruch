@@ -24,7 +24,7 @@
 
         /* Espacio para el menú fijo al desplazarse */
         section {
-            scroll-margin-top: 120px;
+            scroll-margin-top: 100px;
         }
 
         .font-brand { font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; }
@@ -69,26 +69,26 @@
             background: rgba(0, 80, 87, 0.95);
         }
 
-        /* TÍTULOS MONUMENTALES */
+        /* TÍTULOS REFINADOS Y SIMÉTRICOS */
         .section-header {
-            margin-bottom: 2.5rem;
-            margin-top: 5rem;
+            margin-bottom: 2rem;
+            margin-top: 1.5rem; /* Reducido para evitar el hueco negro */
             position: relative;
         }
 
         .section-header h2 {
-            font-size: 3.5rem; 
+            font-size: 2.2rem; 
             font-weight: 800;
             text-transform: uppercase;
-            letter-spacing: -0.02em;
-            line-height: 1;
+            letter-spacing: -0.01em;
+            line-height: 1.1;
             color: white; 
-            border-left: 10px solid var(--brand-red);
-            padding-left: 1.5rem;
+            border-left: 8px solid var(--brand-red);
+            padding-left: 1.2rem;
         }
 
         @media (min-width: 1024px) {
-            .section-header h2 { font-size: 6rem; }
+            .section-header h2 { font-size: 3.5rem; }
         }
 
         .scrollbar-hide::-webkit-scrollbar { display: none; }
@@ -117,7 +117,6 @@
             border-color: var(--brand-red);
         }
 
-        /* Descripciones e ingredientes */
         .item-desc { 
             font-size: 0.75rem; 
             color: #eeeeee; 
@@ -127,7 +126,6 @@
             line-height: 1.5; 
         }
 
-        /* Estilo para filas de bebidas con texto más grande */
         .drink-row {
             display: flex;
             justify-content: space-between;
@@ -196,7 +194,7 @@
         </div>
     </nav>
 
-    <main class="max-w-6xl mx-auto px-6 mt-16 space-y-16">
+    <main class="max-w-6xl mx-auto px-6 mt-16 space-y-12"> <!-- space-y reducido para simetría -->
 
         <!-- ASISTENTE IA -->
         <section id="ai-assistant" class="ai-panel p-10 md:p-16 shadow-2xl rounded-sm border-l-8 border-brand-red">
@@ -233,7 +231,6 @@
         </section>
 
         <!-- SECCIONES DE COMIDA -->
-
         <section id="hamburguesas">
             <div class="section-header"><h2>Hamburguesas</h2></div>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -349,8 +346,8 @@
             </div>
         </section>
 
-        <!-- SECCIÓN DE BEBIDAS -->
-        <section id="bebidas" class="border-t border-white/10 pt-12 pb-12">
+        <!-- SECCIÓN DE BEBIDAS - AJUSTADA PARA SIMETRÍA -->
+        <section id="bebidas" class="border-t border-white/10 pt-4 pb-12">
             <div class="section-header"><h2>Bebidas</h2></div>
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
                 <!-- Frías -->
