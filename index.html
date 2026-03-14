@@ -327,12 +327,31 @@
             </div>
         </section>
 
+        <!-- PICADAS (CORREGIDO PARA SIMETRÍA) -->
         <section id="picadas">
             <div class="section-header"><h2>Picadas</h2></div>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-                <div class="menu-card p-10"><h3>Pequeña</h3><p class="item-desc">Res, cerdo, pollo, papa, maduro, arepa y salsas caseras</p><p class="price-tag text-3xl mt-4">$35K</p></div>
-                <div class="menu-card p-10 border-2 border-brand-red bg-brand-red/5"><h3>Mediana</h3><p class="item-desc">Res, cerdo, pollo, papa, maduro, arepa, salsas (Para 2-3 personas)</p><p class="price-tag text-3xl mt-4">$70K</p></div>
-                <div class="menu-card p-10"><h3>Familiar</h3><p class="item-desc">Combinación premium Baruch de todas nuestras carnes y acompañamientos</p><p class="price-tag text-3xl mt-4">$100K</p></div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="menu-card">
+                    <div>
+                        <h3 class="font-bold text-xs uppercase mb-1">Pequeña</h3>
+                        <p class="item-desc">Res, cerdo, pollo, papa, maduro, arepa y salsas caseras</p>
+                    </div>
+                    <span class="price-tag mt-4">$35K</span>
+                </div>
+                <div class="menu-card border-l-4 border-brand-red">
+                    <div>
+                        <h3 class="font-bold text-xs uppercase text-brand-red mb-1">Mediana</h3>
+                        <p class="item-desc">Res, cerdo, pollo, papa, maduro, arepa, salsas (Para 2-3 personas)</p>
+                    </div>
+                    <span class="price-tag mt-4">$70K</span>
+                </div>
+                <div class="menu-card">
+                    <div>
+                        <h3 class="font-bold text-xs uppercase mb-1">Familiar</h3>
+                        <p class="item-desc">Combinación premium Baruch de todas nuestras carnes y acompañamientos</p>
+                    </div>
+                    <span class="price-tag mt-4">$100K</span>
+                </div>
             </div>
         </section>
 
@@ -469,7 +488,8 @@
 
                 } catch (error) {
                     if (retryCount < 5) {
-                        await sleep(Math.pow(2, retryCount) * 1000);
+                        const delays = [1000, 2000, 4000, 8000, 16000];
+                        await sleep(delays[retryCount]);
                         return callApi(retryCount + 1);
                     } else {
                         loading.classList.add('hidden');
