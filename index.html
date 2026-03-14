@@ -22,9 +22,14 @@
             scroll-behavior: smooth;
         }
 
-        /* Espacio para el menú fijo al desplazarse */
+        /* AJUSTE DE DESPLAZAMIENTO: Evita que el título se corte en PC */
         section {
-            scroll-margin-top: 100px;
+            scroll-margin-top: 100px; /* Base para móvil */
+        }
+        @media (min-width: 1024px) {
+            section {
+                scroll-margin-top: 140px; /* Más espacio para PC */
+            }
         }
 
         .font-brand { font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; }
@@ -69,10 +74,10 @@
             background: rgba(0, 80, 87, 0.95);
         }
 
-        /* TÍTULOS REFINADOS Y SIMÉTRICOS */
+        /* TÍTULOS REFINADOS */
         .section-header {
             margin-bottom: 2rem;
-            margin-top: 1.5rem; /* Reducido para evitar el hueco negro */
+            margin-top: 2rem;
             position: relative;
         }
 
@@ -194,7 +199,7 @@
         </div>
     </nav>
 
-    <main class="max-w-6xl mx-auto px-6 mt-16 space-y-12"> <!-- space-y reducido para simetría -->
+    <main class="max-w-6xl mx-auto px-6 mt-16 space-y-12">
 
         <!-- ASISTENTE IA -->
         <section id="ai-assistant" class="ai-panel p-10 md:p-16 shadow-2xl rounded-sm border-l-8 border-brand-red">
@@ -230,7 +235,7 @@
             </div>
         </section>
 
-        <!-- SECCIONES DE COMIDA -->
+        <!-- HAMBURGUESAS -->
         <section id="hamburguesas">
             <div class="section-header"><h2>Hamburguesas</h2></div>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -243,6 +248,7 @@
             </div>
         </section>
 
+        <!-- SALCHIPAPAS -->
         <section id="salchipapas">
             <div class="section-header"><h2>Salchipapas</h2></div>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -250,10 +256,11 @@
                 <div class="menu-card"><div><h3 class="font-bold text-xs uppercase mb-1">Ranchera / Santarrosano</h3><p class="item-desc">Papa francesa, salchicha ranchera o Santarrosano, queso gratinado, salsas</p></div><span class="price-tag mt-4">$11K</span></div>
                 <div class="menu-card"><div><h3 class="font-bold text-xs uppercase mb-1">Supercarnes</h3><p class="item-desc">Papa francesa, salchicha, cabano, chorizo, ranchera, queso gratinado</p></div><span class="price-tag mt-4">$22K</span></div>
                 <div class="menu-card"><div><h3 class="font-bold text-xs uppercase mb-1">Salchicostilla</h3><p class="item-desc">Papa francesa, salchicha, costilla ahumada, queso gratinado</p></div><span class="price-tag mt-4">$22K</span></div>
-                <div class="menu-card border-l-4 border-brand-teal"><div><h3 class="font-bold text-xs uppercase mb-1 text-teal-400">Desgranado</h3><p class="item-desc">Papa francesa, maíz tierno, pollo, tocineta, mucho queso gratinado</p></div><span class="price-tag mt-4">$24K</span></div>
+                <div class="menu-card border-l-4 border-brand-teal"><div><h3 class="font-bold text-xs uppercase mb-1">Desgranado</h3><p class="item-desc">Papa francesa, maíz tierno, pollo, tocineta, mucho queso gratinado</p></div><span class="price-tag mt-4">$24K</span></div>
             </div>
         </section>
 
+        <!-- PARRILLA -->
         <section id="parrilla">
             <div class="section-header"><h2>Parrilla</h2></div>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -263,6 +270,7 @@
             </div>
         </section>
 
+        <!-- PINCHOS -->
         <section id="pinchos">
             <div class="section-header"><h2>Pinchos</h2></div>
             <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
@@ -297,7 +305,7 @@
             <div class="section-header"><h2>Apanados</h2></div>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <div class="menu-card"><div><h3 class="font-bold text-xs uppercase mb-1">Pollo Broster</h3><p class="item-desc">Pollo marinado y apanado crocante, papa francesa, salsas</p></div><span class="price-tag mt-4">$12K</span></div>
-                <div class="menu-card border-l-4 border-brand-teal"><div><h3 class="font-bold text-xs uppercase text-teal-400 mb-1">Alitas BBQ x6</h3><p class="item-desc">Alitas de pollo bañadas en salsa BBQ ahumada, papa francesa</p></div><span class="price-tag mt-4">$20K</span></div>
+                <div class="menu-card border-l-4 border-brand-teal"><div><h3 class="font-bold text-xs uppercase mb-1">Alitas BBQ x6</h3><p class="item-desc">Alitas de pollo bañadas en salsa BBQ ahumada, papa francesa</p></div><span class="price-tag mt-4">$20K</span></div>
                 <div class="menu-card"><div><h3 class="font-bold text-xs uppercase mb-1">Chuleta de Pollo</h3><p class="item-desc">Filete de pollo apanado, porción de papa francesa y salsas</p></div><span class="price-tag mt-4">$18K</span></div>
             </div>
         </section>
@@ -315,7 +323,7 @@
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <div class="menu-card"><div><h3 class="font-bold text-xs uppercase mb-1">Pollo / Carne</h3><p class="item-desc">Pan artesanal, pollo o carne desmechada, queso, vegetales frescos</p></div><span class="price-tag mt-4">$15K</span></div>
                 <div class="menu-card"><div><h3 class="font-bold text-xs uppercase mb-1">Mexicano</h3><p class="item-desc">Pan, carne desmechada, guacamole, toque de picante, queso y vegetales</p></div><span class="price-tag mt-4">$17K</span></div>
-                <div class="menu-card border-l-4 border-brand-teal"><div><h3 class="font-bold text-xs uppercase text-teal-400 mb-1">Sándwich Mixto</h3><p class="item-desc">Pan, pollo, carne desmechada, extra queso, vegetales frescos y salsas</p></div><span class="price-tag mt-4">$23K</span></div>
+                <div class="menu-card border-l-4 border-brand-teal"><div><h3 class="font-bold text-xs uppercase mb-1">Sándwich Mixto</h3><p class="item-desc">Pan, pollo, carne desmechada, extra queso, vegetales frescos y salsas</p></div><span class="price-tag mt-4">$23K</span></div>
             </div>
         </section>
 
@@ -342,15 +350,14 @@
             <div class="section-header"><h2>Pataches</h2></div>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div class="menu-card"><div><h3 class="font-bold text-xs uppercase mb-1">Patache Baruch</h3><p class="item-desc">Plátano frito artesanal (patacón), carnes desmechadas, queso y salsas</p></div><span class="price-tag mt-4">$15K</span></div>
-                <div class="menu-card border-l-4 border-brand-teal"><div><h3 class="font-bold text-xs uppercase text-teal-400 mb-1">Patache Mixto</h3><p class="item-desc">Patacón gigante con pollo, carne, abundante queso y salsas de la casa</p></div><span class="price-tag mt-4">$23K</span></div>
+                <div class="menu-card border-l-4 border-brand-teal"><div><h3 class="font-bold text-xs uppercase mb-1">Patache Mixto</h3><p class="item-desc">Patacón gigante con pollo, carne, abundante queso y salsas de la casa</p></div><span class="price-tag mt-4">$23K</span></div>
             </div>
         </section>
 
-        <!-- SECCIÓN DE BEBIDAS - AJUSTADA PARA SIMETRÍA -->
+        <!-- BEBIDAS -->
         <section id="bebidas" class="border-t border-white/10 pt-4 pb-12">
             <div class="section-header"><h2>Bebidas</h2></div>
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
-                <!-- Frías -->
                 <div class="space-y-6">
                     <h3 class="font-brand text-xl border-b border-brand-teal pb-4 text-white">Bebidas Frías</h3>
                     <div class="bg-white/5 p-6 rounded-lg">
@@ -362,7 +369,6 @@
                         <div class="drink-row"><span>Jugos Naturales</span> <b>$5K / $6K</b></div>
                     </div>
                 </div>
-                <!-- Calientes -->
                 <div class="space-y-6">
                     <h3 class="font-brand text-xl border-b border-brand-red pb-4 text-white">Calientes</h3>
                     <div class="bg-white/5 p-6 rounded-lg">
@@ -373,7 +379,6 @@
                         <div class="drink-row"><span>Frutos Rojos / Amarillos</span> <b>$6K</b></div>
                     </div>
                 </div>
-                <!-- Cervezas -->
                 <div class="space-y-6">
                     <h3 class="font-brand text-xl border-b border-brand-teal pb-4 text-white">Cervezas & Micheladas</h3>
                     <div class="bg-white/5 p-6 rounded-lg">
