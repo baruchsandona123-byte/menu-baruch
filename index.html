@@ -81,17 +81,25 @@
         .scrollbar-hide::-webkit-scrollbar { display: none; }
         
         .nav-item {
-            font-size: 0.65rem;
+            font-size: 0.6rem;
             font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 0.15em;
-            padding: 0.6rem 1.2rem;
+            letter-spacing: 0.1em;
+            padding: 0.5rem 0.8rem;
             border: 1px solid rgba(255,255,255,0.05);
             transition: all 0.3s;
             white-space: nowrap;
             background: rgba(255,255,255,0.03);
             display: inline-block;
         }
+        
+        @media (min-width: 1024px) {
+            .nav-item {
+                font-size: 0.65rem;
+                padding: 0.6rem 1rem;
+            }
+        }
+
         .nav-item:hover {
             background: var(--brand-red);
             color: white;
@@ -137,12 +145,14 @@
         </div>
     </header>
 
-    <nav class="sticky top-0 z-50 nav-blur border-b border-brand-red/30 py-5 overflow-x-auto scrollbar-hide">
-        <div class="flex space-x-3 px-6 max-w-7xl mx-auto">
+    <!-- Barra de navegación mejorada para PC (flex-wrap en md/lg) -->
+    <nav class="sticky top-0 z-50 nav-blur border-b border-brand-red/30 py-4 overflow-x-auto lg:overflow-visible scrollbar-hide">
+        <div class="flex lg:flex-wrap lg:justify-center space-x-2 lg:space-x-1 lg:gap-y-2 px-6 max-w-7xl mx-auto">
             <a href="#hamburguesas" class="nav-item">Hamburguesas</a>
             <a href="#salchipapas" class="nav-item">Salchipapas</a>
             <a href="#parrilla" class="nav-item">Parrilla</a>
             <a href="#pinchos" class="nav-item">Pinchos</a>
+            <a href="#tostones" class="nav-item">Tostones</a>
             <a href="#arepas" class="nav-item">Arepas</a>
             <a href="#apanados" class="nav-item">Apanados</a>
             <a href="#perros" class="nav-item">Perros</a>
@@ -150,14 +160,13 @@
             <a href="#picadas" class="nav-item">Picadas</a>
             <a href="#costillas" class="nav-item">Costillas</a>
             <a href="#pataches" class="nav-item">Pataches</a>
-            <a href="#tostones" class="nav-item">Tostones</a>
             <a href="#bebidas" class="nav-item bg-brand-red text-white">Bebidas</a>
         </div>
     </nav>
 
     <main class="max-w-6xl mx-auto px-6 mt-16 space-y-24">
 
-        <!-- ASISTENTE IA DE RECOMENDACIONES -->
+        <!-- ASISTENTE IA DE RECOMENDACIONES (INTACTO) -->
         <section id="ai-assistant" class="ai-panel p-10 md:p-16 shadow-2xl rounded-sm border-l-8 border-brand-red">
             <div class="max-w-3xl mx-auto text-center">
                 <span class="bg-brand-red/10 text-brand-red text-[9px] font-black px-5 py-1.5 rounded-full tracking-[0.3em] uppercase mb-4 inline-block">Sugerencia del Chef Baruch ✨</span>
@@ -239,7 +248,7 @@
             </div>
         </section>
 
-        <!-- TOSTONES (NUEVA CATEGORÍA) -->
+        <!-- TOSTONES -->
         <section id="tostones">
             <div class="section-header"><h2 class="font-brand text-3xl">Tostones</h2></div>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -261,6 +270,35 @@
             </div>
         </section>
 
+        <!-- APANADOS -->
+        <section id="apanados">
+            <div class="section-header"><h2 class="font-brand text-3xl">Apanados</h2></div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="menu-card"><div><h3 class="font-bold text-xs uppercase mb-1">Pollo Broster</h3><p class="item-desc">Pollo broster, papa francesa, salsas caseras</p></div><span class="price-tag mt-4">$12K</span></div>
+                <div class="menu-card border-l-4 border-brand-teal"><div><h3 class="font-bold text-xs uppercase mb-1">Alitas BBQ x6</h3><p class="item-desc">Alitas, salsa BBQ, papa francesa</p></div><span class="price-tag mt-4">$20K</span></div>
+                <div class="menu-card"><div><h3 class="font-bold text-xs uppercase mb-1">Chuleta de Pollo</h3><p class="item-desc">Pollo apanado, papa francesa, salsas</p></div><span class="price-tag mt-4">$18K</span></div>
+            </div>
+        </section>
+
+        <!-- PERROS -->
+        <section id="perros">
+            <div class="section-header"><h2 class="font-brand text-3xl">Perros</h2></div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="menu-card"><div><h3 class="font-bold text-xs uppercase mb-1">Perro Tradicional</h3><p class="item-desc">Pan, salchicha, queso, ripio, salsas</p></div><span class="price-tag mt-4">$12K</span></div>
+                <div class="menu-card border-l-4 border-brand-red"><div><h3 class="font-bold text-xs uppercase mb-1">Perra Baruch</h3><p class="item-desc">Pan, carnes desmechadas, tocineta, mucho queso, ripio, salsas</p></div><span class="price-tag mt-4">$25K</span></div>
+            </div>
+        </section>
+
+        <!-- SÁNDWICH -->
+        <section id="sandwis">
+            <div class="section-header"><h2 class="font-brand text-3xl">Sándwich</h2></div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="menu-card"><div><h3 class="font-bold text-xs uppercase mb-1">Pollo / Carne</h3><p class="item-desc">Pan, pollo o carne, queso, vegetales, salsas</p></div><span class="price-tag mt-4">$15K</span></div>
+                <div class="menu-card"><div><h3 class="font-bold text-xs uppercase mb-1">Mexicano</h3><p class="item-desc">Pan, carne, guacamole, picante, queso, vegetales</p></div><span class="price-tag mt-4">$17K</span></div>
+                <div class="menu-card border-l-4 border-brand-teal"><div><h3 class="font-bold text-xs uppercase mb-1">Mixto</h3><p class="item-desc">Pan, pollo, carne, queso, vegetales, salsas</p></div><span class="price-tag mt-4">$23K</span></div>
+            </div>
+        </section>
+
         <!-- PICADAS -->
         <section id="picadas">
             <div class="section-header"><h2 class="font-brand text-3xl">Picadas</h2></div>
@@ -268,6 +306,26 @@
                 <div class="menu-card p-10"><h3>Pequeña</h3><p class="item-desc">Porción personal de carnes y acompañantes</p><p class="price-tag text-3xl mt-4">$35K</p></div>
                 <div class="menu-card p-10 border-2 border-brand-red bg-brand-red/5"><h3>Mediana</h3><p class="item-desc">Res, cerdo, pollo, papa, maduro, arepa, salsas (Ideal para 2-3 personas)</p><p class="price-tag text-3xl mt-4">$70K</p></div>
                 <div class="menu-card p-10"><h3>Familiar</h3><p class="item-desc">Selección premium Baruch de todas nuestras carnes y acompañamientos</p><p class="price-tag text-3xl mt-4">$100K</p></div>
+            </div>
+        </section>
+
+        <!-- COSTILLAS -->
+        <section id="costillas">
+            <div class="section-header"><h2 class="font-brand text-3xl">Costillas</h2></div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="menu-card border-l-4 border-brand-red">
+                    <div><h3 class="font-bold text-xs uppercase mb-1">Costillas BBQ</h3><p class="item-desc">Costillas de cerdo, salsa BBQ, papa francesa</p></div>
+                    <span class="price-tag mt-4">$20K</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- PATACHES -->
+        <section id="pataches">
+            <div class="section-header"><h2 class="font-brand text-3xl">Pataches</h2></div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="menu-card"><div><h3 class="font-bold text-xs uppercase mb-1">Patache Baruch</h3><p class="item-desc">Plátano frito (patacón), carnes desmechadas, queso, salsas</p></div><span class="price-tag mt-4">$15K</span></div>
+                <div class="menu-card border-l-4 border-brand-teal"><div><h3 class="font-bold text-xs uppercase mb-1">Patache Mixto</h3><p class="item-desc">Plátano frito, pollo, carne, queso, salsas</p></div><span class="price-tag mt-4">$23K</span></div>
             </div>
         </section>
 
@@ -284,7 +342,6 @@
                         <div class="flex justify-between"><span>Frapuchino</span> <b class="text-brand-red">$10K</b></div>
                         <div class="flex justify-between"><span>Ice Coffe</span> <b class="text-brand-red">$9K</b></div>
                         <div class="flex justify-between"><span>Cerezada</span> <b class="text-brand-red">$8K</b></div>
-                        <div class="flex justify-between"><span>Jugo Natural (Agua)</span> <b class="text-brand-red">$5K</b></div>
                         <div class="flex justify-between"><span>Malteada Ron / Coco Loco</span> <b class="text-brand-red">$13K</b></div>
                         <div class="flex justify-between"><span>Malteada Sabores</span> <b class="text-brand-red">$10K</b></div>
                     </div>
@@ -301,7 +358,6 @@
                 <div class="space-y-8">
                     <h3 class="font-brand text-xl border-b border-brand-teal pb-4 text-white">Cervezas & Micheladas</h3>
                     <div class="bg-white/5 p-6 space-y-4 text-[10px] uppercase font-bold">
-                        <div class="flex justify-between"><span>Michelada Nacional</span> <b>$7K</b></div>
                         <div class="flex justify-between text-brand-red"><span>Michelada Especial</span> <b>$10K</b></div>
                         <div class="flex justify-between"><span>Corona / Importada</span> <b>$7K</b></div>
                         <div class="flex justify-between"><span>Poker / Club</span> <b>$5K</b></div>
@@ -347,13 +403,14 @@
             - Tostones: Tostón Baruch (Tocineta, pollo, carne desmechada, maíz tierno, queso).
             - Hamburguesas: Baruch Especial ($24k), Tradicional, Artesanal, XXL ($30k).
             - Salchipapas: Pequeña ($9k), Ranchera ($11k), Salchicostilla ($22k), Desgranado ($24k).
-            - Carnes: Res, Cerdo, Pollo ($18k).
+            - Apanados: Pollo Broster ($12k), Alitas BBQ ($20k), Chuleta de Pollo ($18k).
+            - Perros: Perro Tradicional ($12k), Perra Baruch ($25k).
+            - Sándwich: Pollo/Carne ($15k), Mexicano ($17k), Mixto ($23k).
             - Bebidas: Hervidos Sandoná ($5k), Frapuchino ($10k), Malteada Ron Coco Loco ($13k).
             REGLAS:
             1. Siempre recomienda un combo (Plato + Bebida).
             2. Menciona los ingredientes del plato recomendado de forma descriptiva para antojar al cliente.
-            3. Si el cliente tiene frío, sugiere el Hervido.
-            4. Tono: Elegante y persuasivo. Respuesta corta.`;
+            3. Tono: Elegante y persuasivo. Respuesta corta.`;
 
             const sleep = ms => new Promise(res => setTimeout(res, ms));
 
