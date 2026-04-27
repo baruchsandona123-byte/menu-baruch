@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Baruch - Menú ✨</title>
+    <title>Baruch - Menú de Autor ✨</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <style>
@@ -22,15 +22,8 @@
             scroll-behavior: smooth;
         }
 
-        /* AJUSTE DE DESPLAZAMIENTO: Evita que el título se corte en PC */
-        section {
-            scroll-margin-top: 100px; /* Base para móvil */
-        }
-        @media (min-width: 1024px) {
-            section {
-                scroll-margin-top: 140px; /* Más espacio para PC */
-            }
-        }
+        section { scroll-margin-top: 100px; transition: all 0.3s ease; }
+        @media (min-width: 1024px) { section { scroll-margin-top: 140px; } }
 
         .font-brand { font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; }
 
@@ -63,111 +56,117 @@
             box-shadow: 0 15px 35px rgba(255, 69, 53, 0.25);
         }
 
-        .price-tag {
-            color: var(--brand-red);
+        .price-tag { color: var(--brand-red); font-weight: 800; font-size: 1.1rem; }
+
+        .add-item-btn {
+            background: var(--brand-teal);
+            color: white;
+            padding: 0.4rem 0.8rem;
+            border-radius: 2px;
+            font-size: 0.6rem;
             font-weight: 800;
-            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            transition: all 0.3s;
         }
+        .add-item-btn:hover { background: var(--brand-red); }
 
         .nav-blur {
             backdrop-filter: blur(15px);
             background: rgba(0, 80, 87, 0.95);
         }
 
-        /* TÍTULOS REFINADOS */
-        .section-header {
-            margin-bottom: 2rem;
-            margin-top: 2rem;
-            position: relative;
-        }
-
         .section-header h2 {
-            font-size: 2.2rem; 
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: -0.01em;
-            line-height: 1.1;
-            color: white; 
-            border-left: 8px solid var(--brand-red);
-            padding-left: 1.2rem;
+            font-size: 2.2rem; font-weight: 800; text-transform: uppercase;
+            letter-spacing: -0.01em; line-height: 1.1; color: white; 
+            border-left: 8px solid var(--brand-red); padding-left: 1.2rem;
+            margin: 2rem 0;
         }
 
-        @media (min-width: 1024px) {
-            .section-header h2 { font-size: 3.5rem; }
-        }
-
-        .scrollbar-hide::-webkit-scrollbar { display: none; }
-        
         .nav-item {
+            font-size: 0.65rem; font-weight: 700; text-transform: uppercase;
+            letter-spacing: 0.1em; padding: 0.6rem 0.9rem;
+            border: 1px solid rgba(255,255,255,0.05);
+            transition: all 0.3s; white-space: nowrap;
+            background: rgba(255,255,255,0.03); display: inline-block; color: white;
+        }
+        .nav-item:hover { background: var(--brand-red); color: white; border-color: var(--brand-red); }
+
+        .item-desc { font-size: 0.75rem; color: #eeeeee; margin-top: 0.6rem; line-height: 1.5; }
+
+        .drink-row {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 0.9rem 0; border-bottom: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.9rem; color: white !important; 
+        }
+        .drink-row b { color: var(--brand-red); font-weight: 800; }
+
+        /* MODAL CARRITO */
+        #cart-modal {
+            position: fixed; inset: 0; background: rgba(0,0,0,0.85);
+            z-index: 2000; display: none; align-items: center; justify-content: center;
+            backdrop-filter: blur(8px);
+        }
+        .modal-container {
+            background: var(--card-bg); width: 95%; max-width: 500px;
+            max-height: 85vh; border: 1px solid var(--brand-teal);
+            border-radius: 8px; padding: 1.5rem; display: flex; flex-direction: column;
+        }
+
+        .service-tab {
+            flex: 1; text-align: center; padding: 0.8rem;
+            border: 1px solid rgba(255,255,255,0.1); font-size: 0.7rem;
+            font-weight: 800; text-transform: uppercase; cursor: pointer;
+            transition: all 0.3s; color: white;
+        }
+        .service-tab.active { border-color: var(--brand-red); background: rgba(255, 69, 53, 0.1); color: var(--brand-red); }
+
+        /* BARRA INFERIOR */
+        #cart-bar {
+            position: fixed; bottom: 0; left: 0; width: 100%;
+            background: var(--brand-teal); border-top: 4px solid var(--brand-red);
+            padding: 1rem 1.5rem; z-index: 1000;
+            display: none; justify-content: space-between; align-items: center;
+            box-shadow: 0 -10px 25px rgba(0,0,0,0.5);
+            animation: slideUp 0.3s ease-out;
+        }
+        @keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
+
+        /* VALIDACIÓN */
+        .error-border { border-color: var(--brand-red) !important; box-shadow: 0 0 0 2px rgba(255, 69, 53, 0.5); }
+
+        /* FILTROS */
+        .filter-tag {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            color: #ccc;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
             font-size: 0.65rem;
             font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 0.1em;
-            padding: 0.6rem 0.9rem;
-            border: 1px solid rgba(255,255,255,0.05);
+            letter-spacing: 0.05em;
             transition: all 0.3s;
+            cursor: pointer;
             white-space: nowrap;
-            background: rgba(255,255,255,0.03);
-            display: inline-block;
-            color: white;
         }
-        
-        @media (min-width: 1024px) {
-            .nav-item { font-size: 0.7rem; padding: 0.7rem 1.2rem; }
-        }
-
-        .nav-item:hover {
+        .filter-tag:hover, .filter-tag.active {
             background: var(--brand-red);
             color: white;
             border-color: var(--brand-red);
+            transform: translateY(-2px);
         }
 
-        .item-desc { 
-            font-size: 0.75rem; 
-            color: #eeeeee; 
-            text-transform: none; 
-            letter-spacing: 0.02em; 
-            margin-top: 0.6rem; 
-            line-height: 1.5; 
+        .whatsapp-btn {
+            position: fixed; bottom: 80px; right: 20px;
+            background: #25D366; color: white; width: 60px; height: 60px;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3); z-index: 999; transition: transform 0.3s;
         }
-
-        .drink-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0.9rem 0;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-            font-size: 1rem; 
-            color: white !important; 
-        }
-
-        .drink-row span { color: white; font-weight: 600; }
-        .drink-row b { color: var(--brand-red); font-weight: 800; }
-
-        .typing-dot {
-            width: 8px;
-            height: 8px;
-            background: var(--brand-red);
-            border-radius: 50%;
-            animation: typing 1.4s infinite ease-in-out;
-        }
-        .typing-dot:nth-child(2) { animation-delay: 0.2s; }
-        .typing-dot:nth-child(3) { animation-delay: 0.4s; }
-
-        @keyframes typing {
-            0%, 80%, 100% { transform: scale(0.2); opacity: 0.2; }
-            40% { transform: scale(1); opacity: 1; }
-        }
-
-        .ticket-style {
-            background: #0d0d0d;
-            border: 1px dashed rgba(255,255,255,0.1);
-            padding: 2.5rem;
-            border-radius: 2px;
-        }
+        .whatsapp-btn:hover { transform: scale(1.1); }
     </style>
 </head>
-<body class="pb-24">
+<body class="pb-32">
 
     <header class="h-[400px] flex flex-col items-center justify-center text-center border-b-8 border-brand-teal bg-[#050505]">
         <div class="logo-box">
@@ -181,432 +180,443 @@
         </div>
     </header>
 
-    <nav class="sticky top-0 z-50 nav-blur border-b border-brand-red/30 py-4 overflow-x-auto lg:overflow-visible scrollbar-hide">
+    <!-- BARRA DE NAVEGACIÓN SUPERIOR -->
+    <nav id="top-nav" class="sticky top-0 z-50 nav-blur border-b border-brand-red/30 py-4 overflow-x-auto lg:overflow-visible scrollbar-hide">
         <div class="flex lg:flex-wrap lg:justify-center space-x-2 lg:space-x-1 lg:gap-y-2 px-6 max-w-7xl mx-auto">
-            <a href="#hamburguesas" class="nav-item">Hamburguesas</a>
-            <a href="#salchipapas" class="nav-item">Salchipapas</a>
-            <a href="#parrilla" class="nav-item">Carnes Parrilla</a>
-            <a href="#pinchos" class="nav-item">Pinchos</a>
-            <a href="#tostones" class="nav-item">Tostones</a>
-            <a href="#arepas" class="nav-item">Arepas</a>
-            <a href="#apanados" class="nav-item">Apanados & BBQ</a>
-            <a href="#perros" class="nav-item">Perros</a>
-            <a href="#sandwis" class="nav-item">Sándwich</a>
-            <a href="#picadas" class="nav-item">Picadas</a>
-            <a href="#costillas" class="nav-item">Costillas</a>
-            <a href="#pataches" class="nav-item">Pataches</a>
-            <a href="#bebidas" class="nav-item bg-brand-red text-white">Bebidas</a>
+            <a href="#hamburguesas" class="nav-item" onclick="resetFilters()">Hamburguesas</a>
+            <a href="#salchipapas" class="nav-item" onclick="resetFilters()">Salchipapas</a>
+            <a href="#parrilla" class="nav-item" onclick="resetFilters()">Carnes Parrilla</a>
+            <a href="#pinchos" class="nav-item" onclick="resetFilters()">Pinchos</a>
+            <a href="#tostones" class="nav-item" onclick="resetFilters()">Tostones</a>
+            <a href="#arepas" class="nav-item" onclick="resetFilters()">Arepas</a>
+            <a href="#apanados" class="nav-item" onclick="resetFilters()">Apanados & BBQ</a>
+            <a href="#perros" class="nav-item" onclick="resetFilters()">Perros</a>
+            <a href="#sandwis" class="nav-item" onclick="resetFilters()">Sándwich</a>
+            <a href="#picadas" class="nav-item" onclick="resetFilters()">Picadas</a>
+            <a href="#costillas" class="nav-item" onclick="resetFilters()">Costillas</a>
+            <a href="#pataches" class="nav-item" onclick="resetFilters()">Pataches</a>
+            <a href="#bebidas" class="nav-item bg-brand-red text-white" onclick="resetFilters()">Bebidas</a>
+            <!-- BOTÓN MOVIDO AL FINAL DERECHO -->
+            <a href="https://tu-enlace-aqui.com" target="_blank" class="nav-item bg-orange-600 text-white border-orange-600">Almuerzos Domingos 🍲</a>
         </div>
     </nav>
 
     <main class="max-w-6xl mx-auto px-6 mt-16 space-y-12">
 
-        <!-- ASISTENTE IA -->
-        <section id="ai-assistant" class="ai-panel p-10 md:p-16 shadow-2xl rounded-sm border-l-8 border-brand-red">
-            <div class="max-w-3xl mx-auto text-center">
-                <span class="bg-brand-red/10 text-brand-red text-[9px] font-black px-5 py-1.5 rounded-full tracking-[0.3em] uppercase mb-4 inline-block">Sugerencia del Chef Baruch ✨</span>
-                <h2 class="font-brand text-3xl text-white mb-3">¿Qué te gustaría probar hoy?</h2>
-                <p class="text-[11px] text-gray-400 uppercase tracking-widest mb-8">Cuéntame tus gustos y te diseñaré el combo ideal</p>
-                
-                <div class="flex flex-col md:flex-row bg-black/40 border border-white/10 rounded-sm focus-within:border-brand-red transition-all">
-                    <input type="text" id="user-mood" 
-                           placeholder="Ej: Tengo mucha hambre y quiero algo con tocineta..." 
-                           class="flex-1 p-6 bg-transparent text-white text-sm focus:outline-none">
-                    <button onclick="getAIRecommendation()" id="ai-btn" 
-                            class="bg-brand-teal px-12 py-6 font-black uppercase text-[10px] tracking-widest hover:bg-brand-red transition-all text-white">
-                        Consultar Chef ✨
-                    </button>
+        <!-- BUSCADOR Y FILTROS -->
+        <section id="search-section" class="pt-8 border-t border-white/5">
+            <div class="flex flex-col gap-6">
+                <div class="relative">
+                    <input type="text" id="menu-search" onkeyup="filterMenu()" placeholder="Buscar platos o ingredientes (ej: Tocineta, Queso, Carne)..." class="w-full bg-white/5 border border-white/10 p-5 rounded-sm text-sm focus:outline-none focus:border-brand-red transition-all pl-12 text-white">
+                    <span class="absolute left-5 top-1/2 -translate-y-1/2 opacity-30">🔍</span>
                 </div>
-
-                <div id="ai-loading" class="mt-8 hidden flex flex-col items-center">
-                    <div class="flex space-x-2 mb-3"><div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div></div>
-                    <span class="text-[9px] uppercase tracking-widest text-brand-red font-bold">Inspirando al chef...</span>
-                </div>
-
-                <div id="ai-response" class="mt-10 hidden">
-                    <div class="ticket-style text-left">
-                        <div id="ai-text" class="text-sm leading-relaxed text-gray-200 font-medium italic whitespace-pre-line"></div>
-                        <div class="mt-6 pt-4 border-t border-white/10 flex justify-between items-center">
-                            <span class="text-[8px] uppercase font-bold text-brand-red tracking-widest">Recomendación Personalizada</span>
-                            <button onclick="clearChat()" class="text-[8px] uppercase font-bold text-gray-500 hover:text-white transition tracking-widest">Borrar</button>
-                        </div>
-                    </div>
+                <div class="flex gap-3 overflow-x-auto pb-2 scrollbar-hide">
+                    <button class="filter-tag active" data-filter="todos" onclick="setQuickFilter('todos', this)">Todo</button>
+                    <button class="filter-tag" data-filter="tocineta" onclick="setQuickFilter('tocineta', this)">🥓 Con Tocineta</button>
+                    <button class="filter-tag" data-filter="especial" onclick="setQuickFilter('especial', this)">⭐ Especiales</button>
+                    <button class="filter-tag" data-filter="pollo" onclick="setQuickFilter('pollo', this)">🍗 Pollo</button>
+                    <button class="filter-tag" data-filter="picada" onclick="setQuickFilter('picada', this)">👯 Para Compartir</button>
+                    <button class="filter-tag" data-filter="bebida" onclick="setQuickFilter('bebida', this)">🍹 Bebidas</button>
+                    <button class="filter-tag" data-filter="bbq" onclick="setQuickFilter('bbq', this)">🔥 BBQ</button>
                 </div>
             </div>
         </section>
 
         <!-- HAMBURGUESAS -->
-        <section id="hamburguesas">
+        <section id="hamburguesas" class="menu-section">
             <div class="section-header"><h2>Hamburguesas</h2></div>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="menu-card"><div><h3 class="font-bold text-xs uppercase mb-1">Tradicional</h3><p class="item-desc">Pan hamburguesa, carne, lechuga, tomate, queso, maíz, champiñón, cebolla caramelizada, salsas caseras.</p></div><span class="price-tag mt-4">$16K</span></div>
-                <div class="menu-card"><div><h3 class="font-bold text-xs uppercase mb-1">Artesanal</h3><p class="item-desc">Pan artesanal, carne de res hecha en casa, lechuga, tomate, queso, maíz, champiñón , cebolla caramelizada, salsas caseras.</p></div><span class="price-tag mt-4">$19K</span></div>
-                <div class="menu-card border-l-4 border-brand-red"><div><h3 class="font-bold text-xs uppercase text-brand-red mb-1">Baruch Especial</h3><p class="item-desc">Pan hamburguesa, artesanal hecha en casa, tocineta, maíz, champiñón, cebolla caramelizada, queso fundido, salsas caseras.</p></div><span class="price-tag mt-4">$24K</span></div>
-                <div class="menu-card"><div><h3 class="font-bold text-xs uppercase mb-1">De Pollo</h3><p class="item-desc">Pan hamburguesa, chuleta de pollo, lechuga, tomate, queso, maíz, champiñón, cebolla caramelizada, salsas caseras.</p></div><span class="price-tag mt-4">$19K</span></div>
-                <div class="menu-card"><div><h3 class="font-bold text-xs uppercase mb-1">Ranchera</h3><p class="item-desc">Pan hamburguesa, carne artesanal, salchicha ranchera, queso, maíz, champiñón, cebolla caramelizada, salsas caseras.</p></div><span class="price-tag mt-4">$22K</span></div>
-                <div class="menu-card"><div><h3 class="font-bold text-xs uppercase mb-1">Explosión XXL</h3><p class="item-desc">Pan hamburguesa, carne artesanal, carne desmechada, tocineta, queso, maíz, champiñón, cebolla caramelizada, salsas caseras.</p></div><span class="price-tag mt-4">$30K</span></div>
+                <div class="menu-card"><div><h3 class="font-bold text-xs uppercase mb-1">Tradicional</h3><p class="item-desc">Pan hamburguesa, carne, lechuga, tomate, queso, maíz, champiñón, cebolla caramelizada, salsas caseras.</p></div><div class="flex justify-between items-center mt-4"><span class="price-tag">$16K</span><button class="add-item-btn" onclick="addToCart('Hamb. Tradicional', 16000)">Añadir</button></div></div>
+                <div class="menu-card"><div><h3 class="font-bold text-xs uppercase mb-1">Artesanal</h3><p class="item-desc">Pan artesanal, carne de res hecha en casa, lechuga, tomate, queso, maíz, champiñón , cebolla caramelizada, salsas caseras.</p></div><div class="flex justify-between items-center mt-4"><span class="price-tag">$19K</span><button class="add-item-btn" onclick="addToCart('Hamb. Artesanal', 19000)">Añadir</button></div></div>
+                <div class="menu-card border-l-4 border-brand-red"><div><h3 class="font-bold text-xs uppercase text-brand-red mb-1">Baruch Especial</h3><p class="item-desc">Pan hamburguesa, artesanal hecha en casa, tocineta, maíz, champiñón, cebolla caramelizada, queso fundido, salsas caseras.</p></div><div class="flex justify-between items-center mt-4"><span class="price-tag">$24K</span><button class="add-item-btn" onclick="addToCart('Hamb. Baruch Especial', 24000)">Añadir</button></div></div>
+                <div class="menu-card"><div><h3 class="font-bold text-xs uppercase mb-1">De Pollo</h3><p class="item-desc">Pan hamburguesa, chuleta de pollo, lechuga, tomate, queso, maíz, champiñón, cebolla caramelizada, salsas caseras.</p></div><div class="flex justify-between items-center mt-4"><span class="price-tag">$19K</span><button class="add-item-btn" onclick="addToCart('Hamb. Pollo', 19000)">Añadir</button></div></div>
+                <div class="menu-card"><div><h3 class="font-bold text-xs uppercase mb-1">Ranchera</h3><p class="item-desc">Pan hamburguesa, carne artesanal, salchicha ranchera, queso, maíz, champiñón, cebolla caramelizada, salsas caseras.</p></div><div class="flex justify-between items-center mt-4"><span class="price-tag">$22K</span><button class="add-item-btn" onclick="addToCart('Hamb. Ranchera', 22000)">Añadir</button></div></div>
+                <div class="menu-card"><div><h3 class="font-bold text-xs uppercase mb-1">Explosión XXL</h3><p class="item-desc">Pan hamburguesa, carne artesanal, carne desmechada, tocineta, queso, maíz, champiñón, cebolla caramelizada, salsas caseras.</p></div><div class="flex justify-between items-center mt-4"><span class="price-tag">$30K</span><button class="add-item-btn" onclick="addToCart('Hamb. Explosión XXL', 30000)">Añadir</button></div></div>
             </div>
         </section>
 
         <!-- SALCHIPAPAS -->
-        <section id="salchipapas">
+        <section id="salchipapas" class="menu-section">
             <div class="section-header"><h2>Salchipapas</h2></div>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="menu-card"><div><h3 class="font-bold text-xs uppercase mb-1">Pequeña</h3><p class="item-desc">Papas a la francesa, salchicha, queso gratinado, salsas caseras.</p></div><span class="price-tag mt-4">$9K</span></div>
-                <div class="menu-card"><div><h3 class="font-bold text-xs uppercase mb-1">Ranchera</h3><p class="item-desc">Papas a la francesa, salchicha ranchera, queso gratinado, salsas caseras.</p></div><span class="price-tag mt-4">$11K</span></div>
-                <div class="menu-card"><div><h3 class="font-bold text-xs uppercase mb-1">Santarrosana</h3><p class="item-desc">Papas a la francesa, chorizo santarrosano, queso gratinado, salsas caseras.</p></div><span class="price-tag mt-4">$11K</span></div>
-                <div class="menu-card"><div><h3 class="font-bold text-xs uppercase mb-1">Salchipollo</h3><p class="item-desc">Papas a la francesa, salchicha, pollo desmechado, queso gratinado, salsas caseras.</p></div><span class="price-tag mt-4">$20K</span></div>
-                <div class="menu-card"><div><h3 class="font-bold text-xs uppercase mb-1">Salchicarne</h3><p class="item-desc">Papas a la francesa, salchicha, carne desmechada, queso gratinado, salsas caseras.</p></div><span class="price-tag mt-4">$20K</span></div>
-                <div class="menu-card"><div><h3 class="font-bold text-xs uppercase mb-1">Super Carnes</h3><p class="item-desc">Papas a la francesa, salchicha, cabano, chorizo, ranchera, queso gratinado, salsas caseras.</p></div><span class="price-tag mt-4">$22K</span></div>
-                <div class="menu-card"><div><h3 class="font-bold text-xs uppercase mb-1">Salchicostilla</h3><p class="item-desc">Papas a la francesa, salchicha, costilla ahumada, queso gratinado, salsas caseras.</p></div><span class="price-tag mt-4">$22K</span></div>
-                <div class="menu-card"><div><h3 class="font-bold text-xs uppercase mb-1">Salchichuleta</h3><p class="item-desc">Papas a la francesa, salchicha, chuleta de pollo, queso gratinado, salsas caseras.</p></div><span class="price-tag mt-4">$23K</span></div>
-                <div class="menu-card border-l-4 border-brand-teal"><div><h3 class="font-bold text-xs uppercase mb-1">Desgranado</h3><p class="item-desc">Papas a la francesa, maíz tierno, pollo, tocineta, queso gratinado, salsas caseras.</p></div><span class="price-tag mt-4">$24K</span></div>
+                <div class="menu-card"><div><h3 class="font-bold text-xs uppercase mb-1">Pequeña</h3><p class="item-desc">Papas a la francesa, salchicha, queso gratinado, salsas caseras.</p></div><div class="flex justify-between items-center mt-4"><span class="price-tag">$9K</span><button class="add-item-btn" onclick="addToCart('Salch. Pequeña', 9000)">Añadir</button></div></div>
+                <div class="menu-card"><div><h3 class="font-bold text-xs uppercase mb-1">Ranchera</h3><p class="item-desc">Papas a la francesa, salchicha ranchera, queso gratinado, salsas caseras.</p></div><div class="flex justify-between items-center mt-4"><span class="price-tag">$11K</span><button class="add-item-btn" onclick="addToCart('Salch. Ranchera', 11000)">Añadir</button></div></div>
+                <div class="menu-card"><div><h3 class="font-bold text-xs uppercase mb-1">Santarrosana</h3><p class="item-desc">Papas a la francesa, chorizo santarrosano, queso gratinado, salsas caseras.</p></div><div class="flex justify-between items-center mt-4"><span class="price-tag">$11K</span><button class="add-item-btn" onclick="addToCart('Salch. Santarrosana', 11000)">Añadir</button></div></div>
+                <div class="menu-card"><div><h3 class="font-bold text-xs uppercase mb-1">Salchipollo</h3><p class="item-desc">Papas a la francesa, salchicha, pollo desmechado, queso gratinado, salsas caseras.</p></div><div class="flex justify-between items-center mt-4"><span class="price-tag">$20K</span><button class="add-item-btn" onclick="addToCart('Salchipollo', 20000)">Añadir</button></div></div>
+                <div class="menu-card"><div><h3 class="font-bold text-xs uppercase mb-1">Salchicarne</h3><p class="item-desc">Papas a la francesa, salchicha, carne desmechada, queso gratinado, salsas caseras.</p></div><div class="flex justify-between items-center mt-4"><span class="price-tag">$20K</span><button class="add-item-btn" onclick="addToCart('Salchicarne', 20000)">Añadir</button></div></div>
+                <div class="menu-card"><div><h3 class="font-bold text-xs uppercase mb-1">Super Carnes</h3><p class="item-desc">Papas a la francesa, salchicha, cabano, chorizo, ranchera, queso gratinado, salsas caseras.</p></div><div class="flex justify-between items-center mt-4"><span class="price-tag">$22K</span><button class="add-item-btn" onclick="addToCart('Salch. Super Carnes', 22000)">Añadir</button></div></div>
+                <div class="menu-card"><div><h3 class="font-bold text-xs uppercase mb-1">Salchicostilla</h3><p class="item-desc">Papas a la francesa, salchicha, costilla ahumada, queso gratinado, salsas caseras.</p></div><div class="flex justify-between items-center mt-4"><span class="price-tag">$22K</span><button class="add-item-btn" onclick="addToCart('Salchicostilla', 22000)">Añadir</button></div></div>
+                <div class="menu-card"><div><h3 class="font-bold text-xs uppercase mb-1">Salchichuleta</h3><p class="item-desc">Papas a la francesa, salchicha, chuleta de pollo, queso gratinado, salsas caseras.</p></div><div class="flex justify-between items-center mt-4"><span class="price-tag">$23K</span><button class="add-item-btn" onclick="addToCart('Salchichuleta', 23000)">Añadir</button></div></div>
+                <div class="menu-card border-l-4 border-brand-teal"><div><h3 class="font-bold text-xs uppercase mb-1">Desgranado</h3><p class="item-desc">Papas a la francesa, maíz tierno, pollo, tocineta, queso gratinado, salsas caseras.</p></div><div class="flex justify-between items-center mt-4"><span class="price-tag">$24K</span><button class="add-item-btn" onclick="addToCart('Desgranado', 24000)">Añadir</button></div></div>
             </div>
         </section>
 
-        <!-- CARNES A LA PARRILLA -->
-        <section id="parrilla">
-            <div class="section-header"><h2>Carnes a la Parrilla</h2></div>
+        <!-- CARNES PARRILLA -->
+        <section id="parrilla" class="menu-section">
+            <div class="section-header"><h2>Carnes Parrilla</h2></div>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="menu-card"><div><h3 class="font-bold text-xs uppercase mb-1">Res</h3><p class="item-desc">Carne de res a la parrilla, papa a la francesa, maduro, salsas caseras</p></div><span class="price-tag mt-4">$18K</span></div>
-                <div class="menu-card"><div><h3 class="font-bold text-xs uppercase mb-1">Cerdo</h3><p class="item-desc">Carne de cerdo a la parrilla, papa a la francesa, maduro, salsas caseras</p></div><span class="price-tag mt-4">$18K</span></div>
-                <div class="menu-card"><div><h3 class="font-bold text-xs uppercase mb-1">Pollo</h3><p class="item-desc">Pechuga de pollo a la parrilla, papá francesa, maduro, salsas caseras</p></div><span class="price-tag mt-4">$18K</span></div>
+                <div class="menu-card"><div><h3 class="font-bold text-xs uppercase mb-1">Res</h3><p class="item-desc">Carne de res a la parrilla, papa a la francesa, maduro, salsas caseras.</p></div><div class="flex justify-between items-center mt-4"><span class="price-tag">$18K</span><button class="add-item-btn" onclick="addToCart('Carne Res Parrilla', 18000)">Añadir</button></div></div>
+                <div class="menu-card"><div><h3 class="font-bold text-xs uppercase mb-1">Cerdo</h3><p class="item-desc">Carne de cerdo a la parrilla, papa a la francesa, maduro, salsas caseras.</p></div><div class="flex justify-between items-center mt-4"><span class="price-tag">$18K</span><button class="add-item-btn" onclick="addToCart('Carne Cerdo Parrilla', 18000)">Añadir</button></div></div>
+                <div class="menu-card"><div><h3 class="font-bold text-xs uppercase mb-1">Pollo</h3><p class="item-desc">Pechuga de pollo a la parrilla, papá francesa, maduro, salsas caseras.</p></div><div class="flex justify-between items-center mt-4"><span class="price-tag">$18K</span><button class="add-item-btn" onclick="addToCart('Pechuga Parrilla', 18000)">Añadir</button></div></div>
             </div>
         </section>
 
         <!-- PINCHOS -->
-        <section id="pinchos">
+        <section id="pinchos" class="menu-section">
             <div class="section-header"><h2>Pinchos</h2></div>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="menu-card"><div><h3 class="font-bold text-xs uppercase mb-1">Res</h3><p class="item-desc">Brocheta de res, pimentón, cebolla, papa francesa o arepa</p></div><span class="price-tag mt-4">$10K</span></div>
-                <div class="menu-card"><div><h3 class="font-bold text-xs uppercase mb-1">Cerdo</h3><p class="item-desc">Brocheta de cerdo, pimentón, cebolla, papa francesa o arepa</p></div><span class="price-tag mt-4">$10K</span></div>
-                <div class="menu-card border-l-4 border-brand-red"><div><h3 class="font-bold text-xs uppercase text-brand-red mb-1">Mixto</h3><p class="item-desc">Brocheta mixta (res y cerdo), papa francesa y salsas</p></div><span class="price-tag mt-4">$10K</span></div>
+                <div class="menu-card"><div><h3 class="font-bold text-xs uppercase mb-1">Res</h3><p class="item-desc">Brocheta de res, pimentón, cebolla, papa francesa o arepa.</p></div><div class="flex justify-between items-center mt-4"><span class="price-tag">$10K</span><button class="add-item-btn" onclick="addToCart('Pincho Res', 10000)">Añadir</button></div></div>
+                <div class="menu-card"><div><h3 class="font-bold text-xs uppercase mb-1">Cerdo</h3><p class="item-desc">Brocheta de cerdo, pimentón, cebolla, papa francesa o arepa.</p></div><div class="flex justify-between items-center mt-4"><span class="price-tag">$10K</span><button class="add-item-btn" onclick="addToCart('Pincho Cerdo', 10000)">Añadir</button></div></div>
+                <div class="menu-card border-l-4 border-brand-red"><div><h3 class="font-bold text-xs uppercase text-brand-red mb-1">Mixto</h3><p class="item-desc">Brocheta mixta (res y cerdo), papa francesa y salsas.</p></div><div class="flex justify-between items-center mt-4"><span class="price-tag">$10K</span><button class="add-item-btn" onclick="addToCart('Pincho Mixto', 10000)">Añadir</button></div></div>
             </div>
         </section>
 
         <!-- TOSTONES -->
-        <section id="tostones">
+        <section id="tostones" class="menu-section">
             <div class="section-header"><h2>Tostones</h2></div>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="menu-card">
-                    <div><h3 class="font-bold text-xs uppercase mb-1">Pollo</h3><p class="item-desc">Plátano, Pollo, Queso, Salsas.</p></div>
-                    <span class="price-tag mt-4">$12K</span>
-                </div>
-                <div class="menu-card">
-                    <div><h3 class="font-bold text-xs uppercase mb-1">Carne</h3><p class="item-desc">Plátano, Carne, Queso, Salsas.</p></div>
-                    <span class="price-tag mt-4">$12K</span>
-                </div>
-                <div class="menu-card border-l-4 border-brand-red">
-                    <div><h3 class="font-bold text-xs uppercase text-brand-red mb-1">Mixto</h3><p class="item-desc">Plátano, Pollo, Carne, Tocineta, Maíz, Queso, Salsas.</p></div>
-                    <span class="price-tag mt-4">$15K</span>
-                </div>
+                <div class="menu-card"><div><h3 class="font-bold text-xs uppercase mb-1">Pollo</h3><p class="item-desc">Plátano verde crocante, pollo desmechado, queso, salsas.</p></div><div class="flex justify-between items-center mt-4"><span class="price-tag">$12K</span><button class="add-item-btn" onclick="addToCart('Tostón Pollo', 12000)">Añadir</button></div></div>
+                <div class="menu-card"><div><h3 class="font-bold text-xs uppercase mb-1">Carne</h3><p class="item-desc">Plátano verde crocante, carne desmechada, queso, salsas.</p></div><div class="flex justify-between items-center mt-4"><span class="price-tag">$12K</span><button class="add-item-btn" onclick="addToCart('Tostón Carne', 12000)">Añadir</button></div></div>
+                <div class="menu-card border-l-4 border-brand-red"><div><h3 class="font-bold text-xs uppercase text-brand-red mb-1">Mixto</h3><p class="item-desc">Plátano verde, pollo, carne, tocineta, maíz, queso, salsas.</p></div><div class="flex justify-between items-center mt-4"><span class="price-tag">$15K</span><button class="add-item-btn" onclick="addToCart('Tostón Mixto', 15000)">Añadir</button></div></div>
             </div>
         </section>
 
         <!-- AREPAS -->
-        <section id="arepas">
+        <section id="arepas" class="menu-section">
             <div class="section-header"><h2>Arepas</h2></div>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="menu-card">
-                    <div><h3 class="font-bold text-xs uppercase mb-1">Jamón y Queso</h3><p class="item-desc">Arepa, Jamón, Queso, Salsas.</p></div>
-                    <span class="price-tag mt-4">$7K</span>
-                </div>
-                <div class="menu-card">
-                    <div><h3 class="font-bold text-xs uppercase mb-1">Hawaiana</h3><p class="item-desc">Arepa, Jamón, Queso, Piña, Salsas.</p></div>
-                    <span class="price-tag mt-4">$9K</span>
-                </div>
-                <div class="menu-card">
-                    <div><h3 class="font-bold text-xs uppercase mb-1">Pollo</h3><p class="item-desc">Arepa, Pollo desmechado, Queso, Salsas.</p></div>
-                    <span class="price-tag mt-4">$12K</span>
-                </div>
-                <div class="menu-card">
-                    <div><h3 class="font-bold text-xs uppercase mb-1">Carne</h3><p class="item-desc">Arepa, Carne desmechada, Queso, Salsas.</p></div>
-                    <span class="price-tag mt-4">$12K</span>
-                </div>
-                <div class="menu-card">
-                    <div><h3 class="font-bold text-xs uppercase mb-1">Mixta</h3><p class="item-desc">Arepa, Pollo, Carne desmechada, Queso, Salsas.</p></div>
-                    <span class="price-tag mt-4">$14K</span>
-                </div>
-                <div class="menu-card border-l-4 border-brand-red">
-                    <div><h3 class="font-bold text-xs uppercase text-brand-red mb-1">Baruch Especial</h3><p class="item-desc">Arepa especial, Carne, Pollo, Ranchera, Cabano, Salchicha, Queso, Salsas.</p></div>
-                    <span class="price-tag mt-4">$16K</span>
-                </div>
+                <div class="menu-card"><div><h3 class="font-bold text-xs uppercase mb-1">Jamón y Queso</h3><p class="item-desc">Arepa, Jamón, Queso, Salsas.</p></div><div class="flex justify-between items-center mt-4"><span class="price-tag">$7K</span><button class="add-item-btn" onclick="addToCart('Arepa Jamón/Queso', 7000)">Añadir</button></div></div>
+                <div class="menu-card"><div><h3 class="font-bold text-xs uppercase mb-1">Hawaiana</h3><p class="item-desc">Arepa, Jamón, Queso, Piña, Salsas.</p></div><div class="flex justify-between items-center mt-4"><span class="price-tag">$9K</span><button class="add-item-btn" onclick="addToCart('Arepa Hawaiana', 9000)">Añadir</button></div></div>
+                <div class="menu-card"><div><h3 class="font-bold text-xs uppercase mb-1">Pollo</h3><p class="item-desc">Arepa, Pollo desmechado, Queso, Salsas.</p></div><div class="flex justify-between items-center mt-4"><span class="price-tag">$12K</span><button class="add-item-btn" onclick="addToCart('Arepa Pollo', 12000)">Añadir</button></div></div>
+                <div class="menu-card"><div><h3 class="font-bold text-xs uppercase mb-1">Carne</h3><p class="item-desc">Arepa, Carne desmechada, Queso, Salsas.</p></div><div class="flex justify-between items-center mt-4"><span class="price-tag">$12K</span><button class="add-item-btn" onclick="addToCart('Arepa Carne', 12000)">Añadir</button></div></div>
+                <div class="menu-card"><div><h3 class="font-bold text-xs uppercase mb-1">Mixta</h3><p class="item-desc">Arepa, Pollo, Carne desmechada, Queso, Salsas.</p></div><div class="flex justify-between items-center mt-4"><span class="price-tag">$14K</span><button class="add-item-btn" onclick="addToCart('Arepa Mixta', 14000)">Añadir</button></div></div>
+                <div class="menu-card border-l-4 border-brand-red"><div><h3 class="font-bold text-xs uppercase text-brand-red mb-1">Baruch Especial</h3><p class="item-desc">Arepa especial, Carne, Pollo, Ranchera, Cabano, Salchicha, Queso, Salsas.</p></div><div class="flex justify-between items-center mt-4"><span class="price-tag">$16K</span><button class="add-item-btn" onclick="addToCart('Arepa Baruch Especial', 16000)">Añadir</button></div></div>
             </div>
         </section>
 
         <!-- APANADOS -->
-        <section id="apanados">
+        <section id="apanados" class="menu-section">
             <div class="section-header"><h2>Apanados & BBQ</h2></div>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="menu-card">
-                    <div><h3 class="font-bold text-xs uppercase mb-1">Pollo Broster</h3><p class="item-desc">Pollo apanado estilo broaster, papa francesa, salsas caseras.</p></div>
-                    <span class="price-tag mt-4">$12K</span>
-                </div>
-                <div class="menu-card">
-                    <div><h3 class="font-bold text-xs uppercase mb-1">Croquetas de Pollo</h3><p class="item-desc">Croquetas de pollo apanadas, papa francesa, salsas caseras.</p></div>
-                    <span class="price-tag mt-4">$15K</span>
-                </div>
-                <div class="menu-card border-l-4 border-brand-teal">
-                    <div><h3 class="font-bold text-xs uppercase mb-1">Nuggets</h3><p class="item-desc">Nuggets de pollo, papa francesa, salsas caseras.</p></div>
-                    <span class="price-tag mt-4">$15K</span>
-                </div>
-                <div class="menu-card">
-                    <div><h3 class="font-bold text-xs uppercase mb-1">Chuleta Pollo</h3><p class="item-desc">Chuleta de pollo apanada, papa francesa, maduro, salsas caseras.</p></div>
-                    <span class="price-tag mt-4">$18K</span>
-                </div>
-                <div class="menu-card">
-                    <div><h3 class="font-bold text-xs uppercase mb-1">Alitas BBQ</h3><p class="item-desc">Alitas de pollo en salsa BBQ, papa francesa.</p></div>
-                    <span class="price-tag mt-4">$20K</span>
-                </div>
-                <div class="menu-card">
-                    <div><h3 class="font-bold text-xs uppercase mb-1">Alitas BBQ Picantes/Mostaza</h3><p class="item-desc">Alitas de pollo en salsa BBQ picante o mostaza, papa francesa.</p></div>
-                    <span class="price-tag mt-4">$20K</span>
-                </div>
+                <div class="menu-card"><div><h3 class="font-bold text-xs uppercase mb-1">Pollo Broster</h3><p class="item-desc">Pollo crocante, Papa frita, Salsas.</p></div><div class="flex justify-between items-center mt-4"><span class="price-tag">$12K</span><button class="add-item-btn" onclick="addToCart('Pollo Broster', 12000)">Añadir</button></div></div>
+                <div class="menu-card"><div><h3 class="font-bold text-xs uppercase mb-1">Alitas x6</h3><p class="item-desc">6 alitas en salsa BBQ o miel mostaza, Papa frita, Salsas.</p></div><div class="flex justify-between items-center mt-4"><span class="price-tag">$20K</span><button class="add-item-btn" onclick="addToCart('Alitas x6', 20000)">Añadir</button></div></div>
+                <div class="menu-card border-l-4 border-brand-teal"><div><h3 class="font-bold text-xs uppercase mb-1">Alitas x12</h3><p class="item-desc">12 alitas en salsa BBQ o miel mostaza, Papa frita, Salsas.</p></div><div class="flex justify-between items-center mt-4"><span class="price-tag">$35K</span><button class="add-item-btn" onclick="addToCart('Alitas x12', 35000)">Añadir</button></div></div>
+                <div class="menu-card"><div><h3 class="font-bold text-xs uppercase mb-1">Chuleta Pollo</h3><p class="item-desc">Filete de pollo apanado, Papa frita, Salsas.</p></div><div class="flex justify-between items-center mt-4"><span class="price-tag">$18K</span><button class="add-item-btn" onclick="addToCart('Chuleta Pollo', 18000)">Añadir</button></div></div>
+                <div class="menu-card"><div><h3 class="font-bold text-xs uppercase mb-1">Chuleta Cerdo</h3><p class="item-desc">Filete de cerdo apanado, Papa frita, Salsas.</p></div><div class="flex justify-between items-center mt-4"><span class="price-tag">$18K</span><button class="add-item-btn" onclick="addToCart('Chuleta Cerdo', 18000)">Añadir</button></div></div>
+                <div class="menu-card"><div><h3 class="font-bold text-xs uppercase mb-1">Nuggets x6</h3><p class="item-desc">6 nuggets de pollo, Papa frita, Salsas.</p></div><div class="flex justify-between items-center mt-4"><span class="price-tag">$12K</span><button class="add-item-btn" onclick="addToCart('Nuggets x6', 12000)">Añadir</button></div></div>
             </div>
         </section>
 
         <!-- PERROS -->
-        <section id="perros">
+        <section id="perros" class="menu-section">
             <div class="section-header"><h2>Perros Calientes</h2></div>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="menu-card">
-                    <div><h3 class="font-bold text-xs uppercase mb-1">Tradicional</h3><p class="item-desc">Pan perro, salchicha, papa ripio, queso, maíz, champiñón , cebolla caramelizada, salsas  caseras.</p></div>
-                    <span class="price-tag mt-4">$12K</span>
-                </div>
-                <div class="menu-card">
-                    <div><h3 class="font-bold text-xs uppercase mb-1">Ranchero / Choriperro</h3><p class="item-desc">Pan perro, chorizo o chorizo  ranchero, papa ripio, queso, maíz, champiñón , cebolla caramelizada, salsas  caseras.</p></div>
-                    <span class="price-tag mt-4">$15K</span>
-                </div>
-                <div class="menu-card border-l-4 border-brand-red">
-                    <div><h3 class="font-bold text-xs uppercase text-brand-red mb-1">Perra Baruch Especial</h3><p class="item-desc">Pan perro, salchicha, carne, pollo, tocineta, queso, papa ripio, salsas.</p></div>
-                    <span class="price-tag mt-4">$25K</span>
-                </div>
+                <div class="menu-card"><div><h3 class="font-bold text-xs uppercase mb-1">Tradicional</h3><p class="item-desc">Pan, Salchicha, Queso, Papas ripio, Salsas.</p></div><div class="flex justify-between items-center mt-4"><span class="price-tag">$12K</span><button class="add-item-btn" onclick="addToCart('Perro Tradicional', 12000)">Añadir</button></div></div>
+                <div class="menu-card"><div><h3 class="font-bold text-xs uppercase mb-1">Perra Tradicional</h3><p class="item-desc">Pan, Tocineta, Queso, Papas ripio, Salsas.</p></div><div class="flex justify-between items-center mt-4"><span class="price-tag">$15K</span><button class="add-item-btn" onclick="addToCart('Perra Tradicional', 15000)">Añadir</button></div></div>
+                <div class="menu-card border-l-4 border-brand-red"><div><h3 class="font-bold text-xs uppercase text-brand-red mb-1">Perra Baruch Especial</h3><p class="item-desc">Pan, Pollo, Carne, Tocineta, Maíz, Queso, Papas ripio, Salsas.</p></div><div class="flex justify-between items-center mt-4"><span class="price-tag">$25K</span><button class="add-item-btn" onclick="addToCart('Perra Baruch Especial', 25000)">Añadir</button></div></div>
             </div>
         </section>
 
         <!-- SÁNDWICH -->
-        <section id="sandwis">
+        <section id="sandwis" class="menu-section">
             <div class="section-header"><h2>Sándwich Cubanos</h2></div>
             <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
-                <div class="menu-card">
-                    <div><h3 class="font-bold text-xs uppercase mb-1">Pollo</h3><p class="item-desc">Pan sándwich, pollo, queso, jamón, lechuga, tomate, salsas caseras.</p></div>
-                    <span class="price-tag mt-4">$15K</span>
-                </div>
-                <div class="menu-card">
-                    <div><h3 class="font-bold text-xs uppercase mb-1">Carne</h3><p class="item-desc">Pan sándwich, carne, queso, jamón, lechuga, tomate, salsas caseras.</p></div>
-                    <span class="price-tag mt-4">$16K</span>
-                </div>
-                <div class="menu-card">
-                    <div><h3 class="font-bold text-xs uppercase mb-1">Mixto</h3><p class="item-desc">Pan sándwich, carne, pollo, queso, jamón ,lechuga, tomate, salsas caseras.</p></div>
-                    <span class="price-tag mt-4">$23K</span>
-                </div>
-                <div class="menu-card border-l-4 border-brand-teal">
-                    <div><h3 class="font-bold text-xs uppercase mb-1">Mexicano</h3><p class="item-desc">Pan sándwich, carne, jalapeños, queso, maíz, salsas caseras.</p></div>
-                    <span class="price-tag mt-4">$17K</span>
-                </div>
+                <div class="menu-card"><div><h3 class="font-bold text-xs uppercase mb-1">Pollo</h3><p class="item-desc">Pan sándwich, pollo, queso, jamón, lechuga, tomate, salsas caseras.</p></div><div class="flex justify-between items-center mt-4"><span class="price-tag">$15K</span><button class="add-item-btn" onclick="addToCart('Sándwich Pollo', 15000)">Añadir</button></div></div>
+                <div class="menu-card"><div><h3 class="font-bold text-xs uppercase mb-1">Carne</h3><p class="item-desc">Pan sándwich, carne, queso, jamón, lechuga, tomate, salsas caseras.</p></div><div class="flex justify-between items-center mt-4"><span class="price-tag">$16K</span><button class="add-item-btn" onclick="addToCart('Sándwich Carne', 16000)">Añadir</button></div></div>
+                <div class="menu-card"><div><h3 class="font-bold text-xs uppercase mb-1">Mixto</h3><p class="item-desc">Pan sándwich, carne, pollo, queso, jamón ,lechuga, tomate, salsas caseras.</p></div><div class="flex justify-between items-center mt-4"><span class="price-tag">$23K</span><button class="add-item-btn" onclick="addToCart('Sándwich Mixto', 23000)">Añadir</button></div></div>
+                <div class="menu-card border-l-4 border-brand-teal"><div><h3 class="font-bold text-xs uppercase mb-1">Mexicano</h3><p class="item-desc">Pan sándwich, carne, jalapeños, queso, maíz, salsas caseras.</p></div><div class="flex justify-between items-center mt-4"><span class="price-tag">$17K</span><button class="add-item-btn" onclick="addToCart('Sándwich Mexicano', 17000)">Añadir</button></div></div>
             </div>
         </section>
 
         <!-- PICADAS -->
-        <section id="picadas">
+        <section id="picadas" class="menu-section">
             <div class="section-header"><h2>Picadas</h2></div>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="menu-card">
-                    <div>
-                        <h3 class="font-bold text-xs uppercase mb-1">Pequeña</h3>
-                        <p class="item-desc">Papa francesa, salchicha, chorizo, carne, pollo, carne de res , carne de cerdo, salsas caseras</p>
-                    </div>
-                    <span class="price-tag mt-4">$35K</span>
-                </div>
-                <div class="menu-card border-l-4 border-brand-red">
-                    <div>
-                        <h3 class="font-bold text-xs uppercase text-brand-red mb-1">Mediana</h3>
-                        <p class="item-desc">Papa francesa, salchicha, chorizo, carne, pollo, carne de res, costilla, tocineta, salsas caseras (Para 2-3 personas)</p>
-                    </div>
-                    <span class="price-tag mt-4">$70K</span>
-                </div>
-                <div class="menu-card">
-                    <div>
-                        <h3 class="font-bold text-xs uppercase mb-1">Familiar</h3>
-                        <p class="item-desc">Combinación premium Baruch Papa francesa, salchicha, chorizo, carne, pollo, carne de res, costilla, tocineta, salsas caseras</p>
-                    </div>
-                    <span class="price-tag mt-4">$100K</span>
-                </div>
+                <div class="menu-card"><div><h3 class="font-bold text-xs uppercase mb-1">Pequeña</h3><p class="item-desc">Papa francesa, salchicha, chorizo, carne, pollo, res, cerdo, salsas caseras.</p></div><div class="flex justify-between items-center mt-4"><span class="price-tag">$35K</span><button class="add-item-btn" onclick="addToCart('Picada Pequeña', 35000)">Añadir</button></div></div>
+                <div class="menu-card border-l-4 border-brand-red"><div><h3 class="font-bold text-xs uppercase text-brand-red mb-1">Mediana</h3><p class="item-desc">Papa frita, salchicha, chorizo, carne, pollo, res, costilla, tocineta, salsas (2-3 pers).</p></div><div class="flex justify-between items-center mt-4"><span class="price-tag">$70K</span><button class="add-item-btn" onclick="addToCart('Picada Mediana', 70000)">Añadir</button></div></div>
+                <div class="menu-card"><div><h3 class="font-bold text-xs uppercase mb-1">Familiar</h3><p class="item-desc">Papa frita, salchicha, chorizo, carne, pollo, res, costilla, tocineta, salsas XL.</p></div><div class="flex justify-between items-center mt-4"><span class="price-tag">$100K</span><button class="add-item-btn" onclick="addToCart('Picada Familiar', 100000)">Añadir</button></div></div>
             </div>
         </section>
 
         <!-- COSTILLAS -->
-        <section id="costillas">
-            <div class="section-header"><h2>Costillas BBQ o Caramelizadas</h2></div>
+        <section id="costillas" class="menu-section">
+            <div class="section-header"><h2>Costillas BBQ</h2></div>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div class="menu-card border-l-4 border-brand-red">
-                    <div><h3 class="font-bold text-xs uppercase mb-1">Costillas BBQ o Caramelizadas</h3><p class="item-desc">Costillas de cerdo seleccionadas, papa francesa</p></div>
-                    <span class="price-tag mt-4">$20K</span>
-                </div>
+                <div class="menu-card border-l-4 border-brand-red"><div><h3 class="font-bold text-xs uppercase mb-1">Costillas BBQ o Caramelizadas</h3><p class="item-desc">Costillas de cerdo seleccionadas bañadas en salsa, papa francesa.</p></div><div class="flex justify-between items-center mt-4"><span class="price-tag">$20K</span><button class="add-item-btn" onclick="addToCart('Costillas BBQ', 20000)">Añadir</button></div></div>
             </div>
         </section>
 
-        <!-- PATACHES (ACTUALIZADO SEGÚN IMAGEN: 3 TIPOS) -->
-        <section id="pataches">
+        <!-- PATACHES -->
+        <section id="pataches" class="menu-section">
             <div class="section-header"><h2>Pataches</h2></div>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="menu-card">
-                    <div><h3 class="font-bold text-xs uppercase mb-1">Queso tocineta</h3><p class="item-desc">Maduro frito, queso  tocineta  salsas caseras.</p></div>
-                    <span class="price-tag mt-4">$6K</span>
-                </div>
-                <div class="menu-card">
-                    <div><h3 class="font-bold text-xs uppercase mb-1">Carne / Pollo / Mixto</h3><p class="item-desc">Maduro frito, carne o pollo, mixto, queso, salsas caseras.</p></div>
-                    <span class="price-tag mt-4">$12K</span>
-                </div>
-                <div class="menu-card border-l-4 border-brand-red">
-                    <div><h3 class="font-bold text-xs uppercase text-brand-red mb-1">Baruch</h3><p class="item-desc">Maduro frito, carne, pollo, maíz, tocineta, queso, salsas.</p></div>
-                    <span class="price-tag mt-4">$15K</span>
-                </div>
+                <div class="menu-card"><div><h3 class="font-bold text-xs uppercase mb-1">Queso tocineta</h3><p class="item-desc">Maduro frito, queso, tocineta y salsas caseras.</p></div><div class="flex justify-between items-center mt-4"><span class="price-tag">$6K</span><button class="add-item-btn" onclick="addToCart('Patache Queso/Tocineta', 6000)">Añadir</button></div></div>
+                <div class="menu-card"><div><h3 class="font-bold text-xs uppercase mb-1">Carne / Pollo / Mixto</h3><p class="item-desc">Maduro frito, carne o pollo, mixto, queso, salsas caseras.</p></div><div class="flex justify-between items-center mt-4"><span class="price-tag">$12K</span><button class="add-item-btn" onclick="addToCart('Patache Proteína', 12000)">Añadir</button></div></div>
+                <div class="menu-card border-l-4 border-brand-red"><div><h3 class="font-bold text-xs uppercase text-brand-red mb-1">Baruch</h3><p class="item-desc">Maduro frito, carne, pollo, maíz, tocineta, queso, salsas.</p></div><div class="flex justify-between items-center mt-4"><span class="price-tag">$15K</span><button class="add-item-btn" onclick="addToCart('Patache Baruch', 15000)">Añadir</button></div></div>
             </div>
         </section>
 
         <!-- BEBIDAS -->
-        <section id="bebidas" class="border-t border-white/10 pt-4 pb-12">
+        <section id="bebidas" class="menu-section border-t border-white/10 pt-4 pb-12">
             <div class="section-header"><h2>Bebidas</h2></div>
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
                 <div class="space-y-6">
-                    <h3 class="font-brand text-xl border-b border-brand-teal pb-4 text-white">Bebidas Frías</h3>
-                    <div class="bg-white/5 p-6 rounded-lg">
-                        <div class="drink-row"><span>Frapuchino (Café, hielo, leche, crema)</span> <b>$10K</b></div>
-                        <div class="drink-row"><span>Ice Coffe (Café frío, hielo, leche)</span> <b>$9K</b></div>
-                        <div class="drink-row"><span>Cerezada (Refresco de cereza, hielo)</span> <b>$8K</b></div>
-                        <div class="drink-row"><span>Jugos Naturales en Agua</span> <b>$5K</b></div>
-                        <div class="drink-row"><span>Jugos Naturales en Leche</span> <b>$6K</b></div>
-                        <div class="drink-row"><span>Gaseosa 350ml</span> <b>$5K</b></div>
-                        <div class="drink-row"><span>Gaseosa 400ml</span> <b>$4,5K</b></div>
-                        <div class="drink-row"><span>Jugo Hit Personal</span> <b>$4K</b></div>
-                        <div class="drink-row"><span>Jugo Hit Familiar</span> <b>$6.5K</b></div>
-                        <div class="drink-row"><span>Gaseosa 1.5L</span> <b>$9K</b></div>
-                        <div class="drink-row"><span>Agua Botella</span> <b>$2K</b></div>
+                    <h3 class="font-brand text-xl border-b border-brand-teal pb-4 text-white uppercase text-xs">Frías</h3>
+                    <div class="bg-white/5 p-6 rounded-lg space-y-1">
+                        <div class="drink-row drink-item"><span>Frapuchino (Café, hielo, leche, crema)</span> <div class="flex items-center gap-2"><b>$10K</b><button class="add-item-btn" onclick="addToCart('Frapuchino', 10000)">+</button></div></div>
+                        <div class="drink-row drink-item"><span>Ice Coffe (Café frío, hielo, leche)</span> <div class="flex items-center gap-2"><b>$9K</b><button class="add-item-btn" onclick="addToCart('Ice Coffee', 9000)">+</button></div></div>
+                        <div class="drink-row drink-item"><span>Cerezada (Refresco de cereza, hielo)</span> <div class="flex items-center gap-2"><b>$8K</b><button class="add-item-btn" onclick="addToCart('Cerezada', 8000)">+</button></div></div>
+                        <div class="drink-row drink-item"><span>Jugos Naturales en Agua</span> <div class="flex items-center gap-2"><b>$5K</b><button class="add-item-btn" onclick="addToCart('Jugo Agua', 5000)">+</button></div></div>
+                        <div class="drink-row drink-item"><span>Jugos Naturales en Leche</span> <div class="flex items-center gap-2"><b>$6K</b><button class="add-item-btn" onclick="addToCart('Jugo Leche', 6000)">+</button></div></div>
+                        <div class="drink-row drink-item"><span>Gaseosa 350ml</span> <div class="flex items-center gap-2"><b>$5K</b><button class="add-item-btn" onclick="addToCart('Gaseosa 350ml', 5000)">+</button></div></div>
+                        <div class="drink-row drink-item"><span>Gaseosa 400ml</span> <div class="flex items-center gap-2"><b>$4.5K</b><button class="add-item-btn" onclick="addToCart('Gaseosa 400ml', 4500)">+</button></div></div>
+                        <div class="drink-row drink-item"><span>Jugo Hit Personal</span> <div class="flex items-center gap-2"><b>$4K</b><button class="add-item-btn" onclick="addToCart('Jugo Hit Personal', 4000)">+</button></div></div>
+                        <div class="drink-row drink-item"><span>Jugo Hit Familiar</span> <div class="flex items-center gap-2"><b>$6.5K</b><button class="add-item-btn" onclick="addToCart('Jugo Hit Familiar', 6500)">+</button></div></div>
+                        <div class="drink-row drink-item"><span>Gaseosa 1.5L</span> <div class="flex items-center gap-2"><b>$9K</b><button class="add-item-btn" onclick="addToCart('Gaseosa 1.5L', 9000)">+</button></div></div>
+                        <div class="drink-row drink-item"><span>Agua Botella</span> <div class="flex items-center gap-2"><b>$2K</b><button class="add-item-btn" onclick="addToCart('Agua Botella', 2000)">+</button></div></div>
                     </div>
                 </div>
                 <div class="space-y-6">
-                    <h3 class="font-brand text-xl border-b border-brand-red pb-4 text-white">Bebidas Calientes</h3>
-                    <div class="bg-white/5 p-6 rounded-lg">
-                        <div class="drink-row"><span>Hervidos de Lulo, Maracuyá, Mora (Con o Sin Licor)   </span> <b>$5K</b></div>
-                        <div class="drink-row"><span>Chocolate con Leche</span> <b>$6K</b></div>
-                        <div class="drink-row" style="color: white !important;"><span>Milo</span> <b>$7K</b></div>
-                        <div class="drink-row"><span>Café en Leche</span> <b>$4K</b></div>
-                        <div class="drink-row"><span>Aromaticas (Frutos Rojos / Amarillos / Verdes)</span> <b>$6K</b></div>
-                        <div class="drink-row"><span>Aromaticas (Infusión de hierbas)</span> <b>$3K</b></div>
+                    <h3 class="font-brand text-xl border-b border-brand-red pb-4 text-white uppercase text-xs">Calientes</h3>
+                    <div class="bg-white/5 p-6 rounded-lg space-y-1">
+                        <div class="drink-row drink-item"><span>Hervidos (Con o Sin Licor)</span> <div class="flex items-center gap-2"><b>$5K</b><button class="add-item-btn" onclick="addToCart('Hervido', 5000)">+</button></div></div>
+                        <div class="drink-row drink-item"><span>Chocolate con Leche</span> <div class="flex items-center gap-2"><b>$6K</b><button class="add-item-btn" onclick="addToCart('Chocolate Leche', 6000)">+</button></div></div>
+                        <div class="drink-row drink-item"><span>Milo</span> <div class="flex items-center gap-2"><b>$7K</b><button class="add-item-btn" onclick="addToCart('Milo', 7000)">+</button></div></div>
+                        <div class="drink-row drink-item"><span>Café en Leche</span> <div class="flex items-center gap-2"><b>$4K</b><button class="add-item-btn" onclick="addToCart('Café Leche', 4000)">+</button></div></div>
+                        <div class="drink-row drink-item"><span>Aromáticas (Frutos)</span> <div class="flex items-center gap-2"><b>$6K</b><button class="add-item-btn" onclick="addToCart('Aromática Frutos', 6000)">+</button></div></div>
+                        <div class="drink-row drink-item"><span>Aromáticas (Hierbas)</span> <div class="flex items-center gap-2"><b>$3K</b><button class="add-item-btn" onclick="addToCart('Aromática Hierbas', 3000)">+</button></div></div>
                     </div>
                 </div>
                 <div class="space-y-6">
-                    <h3 class="font-brand text-xl border-b border-brand-teal pb-4 text-white">Cervezas & Micheladas</h3>
-                    <div class="bg-white/5 p-6 rounded-lg">
-                        <div class="drink-row"><span>Cerveza Nacional (Poker / Club Colombia / Cola & Pola)</span> <b>$5K</b></div>
-                        <div class="drink-row"><span>Cerveza Importada (Corona / Budweiser / Heineken)</span> <b>$7K</b></div>
-                        <div class="drink-row"><span>Michelada Cerveza Nacional</span> <b>$7K</b></div>
-                        <div class="drink-row"><span>Michelada Cerveza Importada</span> <b>$9K</b></div>
-                        <div class="drink-row"><span>Michelada especial</span> <b>$10K</b></div>
+                    <h3 class="font-brand text-xl border-b border-brand-teal pb-4 text-white uppercase text-xs">Cervezas</h3>
+                    <div class="bg-white/5 p-6 rounded-lg space-y-1">
+                        <div class="drink-row drink-item"><span>Cerveza Nacional</span> <div class="flex items-center gap-2"><b>$5K</b><button class="add-item-btn" onclick="addToCart('Cerveza Nacional', 5000)">+</button></div></div>
+                        <div class="drink-row drink-item"><span>Cerveza Importada</span> <div class="flex items-center gap-2"><b>$7K</b><button class="add-item-btn" onclick="addToCart('Cerveza Importada', 7000)">+</button></div></div>
+                        <div class="drink-row drink-item"><span>Michelada Nacional</span> <div class="flex items-center gap-2"><b>$7K</b><button class="add-item-btn" onclick="addToCart('Michelada Nacional', 7000)">+</button></div></div>
+                        <div class="drink-row drink-item"><span>Michelada Importada</span> <div class="flex items-center gap-2"><b>$9K</b><button class="add-item-btn" onclick="addToCart('Michelada Importada', 9000)">+</button></div></div>
+                        <div class="drink-row drink-item"><span>Michelada Especial</span> <div class="flex items-center gap-2"><b>$10K</b><button class="add-item-btn" onclick="addToCart('Michelada Especial', 10000)">+</button></div></div>
                     </div>
                 </div>
             </div>
         </section>
-
     </main>
 
-    <footer class="mt-40 bg-brand-teal p-24 text-center border-t-8 border-brand-red text-white">
-        <h2 class="font-brand text-6xl mb-4 tracking-[0.3em]">BARUCH</h2>
-        <div class="max-w-xs mx-auto border-t border-white/20 pt-10">
-            <p class="text-[11px] uppercase tracking-[0.5em] opacity-60 mb-5 font-bold">Sandoná · Nariño</p>
-            <p class="text-4xl font-black text-brand-red tracking-tighter">322 5838947</p>
+    <!-- Barra Carrito -->
+    <div id="cart-bar">
+        <div class="flex flex-col">
+            <span id="cart-count" class="text-[0.6rem] uppercase font-black text-white/60">0 PRODUCTOS</span>
+            <span id="cart-total" class="text-xl font-black text-white">$0</span>
         </div>
-    </footer>
+        <div class="flex items-center gap-4">
+            <button onclick="clearCart()" class="text-[0.6rem] font-bold text-white/40 uppercase">Vaciar</button>
+            <button onclick="toggleCartModal(true)" class="bg-brand-red px-6 py-3 rounded-sm font-black uppercase text-[0.7rem] text-white">RESUMEN 🛒</button>
+        </div>
+    </div>
 
-    <!-- Botón WhatsApp -->
-    <a href="https://wa.me/573225838947" target="_blank" class="fixed bottom-10 right-10 z-50 bg-green-500 text-white p-6 rounded-full border-4 border-white shadow-2xl hover:scale-110 transition-transform">
+    <!-- Modal Resumen -->
+    <div id="cart-modal">
+        <div class="modal-container">
+            <div class="flex justify-between items-center border-b border-brand-teal pb-4 mb-4">
+                <h3 id="modal-title" class="font-brand text-lg text-white uppercase">Tu Pedido</h3>
+                <button onclick="toggleCartModal(false)" class="text-white hover:text-brand-red text-xl">✕</button>
+            </div>
+
+            <div class="mb-3">
+                <label class="text-[9px] font-black uppercase tracking-widest text-brand-red mb-1 block">Nombre del Cliente *</label>
+                <input type="text" id="client-name" placeholder="Escribe tu nombre" class="w-full bg-black/40 border border-white/10 p-3 rounded text-sm focus:outline-none focus:border-brand-red text-white uppercase transition-all">
+            </div>
+
+            <div class="flex gap-2 mb-3">
+                <div id="tab-mesa" onclick="setService('mesa')" class="service-tab active">Mesa 🍽️</div>
+                <div id="tab-domicilio" onclick="setService('domicilio')" class="service-tab">Domicilio 🛵</div>
+            </div>
+
+            <div class="mb-3 flex gap-2">
+                <div id="input-mesa" class="w-24">
+                    <label class="text-[9px] font-black uppercase tracking-widest text-brand-red mb-1 block"># Mesa *</label>
+                    <input type="number" id="mesa-val" placeholder="0" class="w-full bg-black/40 border border-white/10 p-3 rounded text-sm focus:outline-none focus:border-brand-red text-white text-center transition-all">
+                </div>
+                <div id="input-domicilio" class="flex-grow hidden">
+                    <label class="text-[9px] font-black uppercase tracking-widest text-brand-red mb-1 block">Dirección *</label>
+                    <input type="text" id="domi-val" placeholder="Ej: Calle 4 #5-20" class="w-full bg-black/40 border border-white/10 p-3 rounded text-sm focus:outline-none focus:border-brand-red text-white transition-all">
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label class="text-[9px] font-black uppercase tracking-widest text-brand-red mb-1 block">Observaciones</label>
+                <textarea id="order-notes" rows="2" placeholder="Ej: Hamburguesa sin cebolla..." class="w-full bg-black/40 border border-white/10 p-3 rounded text-sm focus:outline-none focus:border-brand-red text-white"></textarea>
+            </div>
+
+            <div id="cart-items-list" class="flex-grow overflow-y-auto space-y-2 pr-2 border-t border-white/5 pt-4 text-white"></div>
+
+            <div class="border-t border-brand-teal pt-4 mt-4">
+                <div class="flex justify-between items-center mb-4 px-2">
+                    <span class="font-bold text-gray-400">Total:</span>
+                    <span id="modal-total" class="text-2xl font-black text-brand-red">$0</span>
+                </div>
+                <button onclick="sendWhatsAppOrder()" class="w-full bg-brand-red py-4 rounded font-black uppercase tracking-widest text-white hover:brightness-110 active:scale-95 transition-all">REALIZAR PEDIDO EN WHATSAPP 🚀</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Botón WhatsApp Flotante -->
+    <a href="https://wa.me/573225838947" target="_blank" class="whatsapp-btn">
         <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.067 2.877 1.215 3.076.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
     </a>
 
     <script>
         const apiKey = ""; 
+        let cart = {}; 
+        let currentService = 'mesa';
+        let currentQuickFilter = 'todos';
 
-        async function getAIRecommendation() {
-            const userText = document.getElementById('user-mood').value;
-            const responseContainer = document.getElementById('ai-response');
-            const responseText = document.getElementById('ai-text');
-            const loading = document.getElementById('ai-loading');
-            const btn = document.getElementById('ai-btn');
-
-            if (!userText.trim()) return;
-
-            loading.classList.remove('hidden');
-            responseContainer.classList.add('hidden');
-            btn.disabled = true;
-
-            const systemPrompt = `Eres el Sommelier y Maestro Chef de "Baruch - Food & Drink" en Sandoná. 
-            Tu misión es recomendar la combinación perfecta basándote en el antojo del cliente.
-            USA ESTE MENÚ ACTUALIZADO CON SUS INGREDIENTES:
-            - Tostones: Pollo ($12k), Carne ($12k), Mixto ($15k).
-            - Hamburguesas: Baruch Especial ($24k), Tradicional, Artesanal, XXL ($30k).
-            - Salchipapas: Pequeña ($9k), Ranchera ($11k), Santarrosana ($11k), Super Carnes ($22k), Desgranado ($24k).
-            - Arepas: Jamón y Queso ($6k), Hawaiana ($8k), Pollo ($12k), Carne ($12k), Mixta ($15k), Baruch Especial ($18k).
-            - Apanados: Pollo Broster ($12k), Alitas x6 ($20k), Alitas x12 ($35k), Chuleta Pollo ($18k), Chuleta Cerdo ($18k), Nuggets x6 ($12k).
-            - Perros: Perro Tradicional ($12k), Perra Tradicional ($15k), Perra Baruch Especial ($25k).
-            - Sándwich: Pollo ($12k), Carne ($12k), Mixto ($15k), Mexicano ($17k).
-            - Pataches: Pollo ($15k), Carne ($15k), Mixto ($23k).
-            - Bebidas: Hervidos Sandoná ($5k), Frapuchino ($10k), Malteada Ron Coco Loco ($13k).
-            REGLAS:
-            1. Siempre recomienda un combo (Plato + Bebida).
-            2. Menciona los ingredientes del plato recomendado para antojar.
-            3. Tono: Elegante y persuasivo. Respuesta corta.`;
-
-            const sleep = ms => new Promise(res => setTimeout(res, ms));
-
-            const callApi = async (retryCount = 0) => {
-                const model = "gemini-2.5-flash-preview-09-2025";
-                const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
-                
-                try {
-                    const response = await fetch(url, {
-                        method: "POST",
-                        headers: { "Content-Type": "application/json" },
-                        body: JSON.stringify({
-                            contents: [{ parts: [{ text: userText }] }],
-                            systemInstruction: { parts: [{ text: systemPrompt }] }
-                        })
-                    });
-
-                    const rawText = await response.text();
-                    let data;
-                    try { data = JSON.parse(rawText); } catch (e) { throw new Error("Error de formato"); }
-
-                    if (!response.ok) throw new Error(`Error API ${response.status}`);
-
-                    const text = data.candidates?.[0]?.content?.parts?.[0]?.text;
-                    if (!text) throw new Error('Vacío');
-
-                    loading.classList.add('hidden');
-                    responseContainer.classList.remove('hidden');
-                    responseText.textContent = text;
-                    btn.disabled = false;
-
-                } catch (error) {
-                    if (retryCount < 5) {
-                        const delays = [1000, 2000, 4000, 8000, 16000];
-                        await sleep(delays[retryCount]);
-                        return callApi(retryCount + 1);
-                    } else {
-                        loading.classList.add('hidden');
-                        btn.disabled = false;
-                        responseContainer.classList.remove('hidden');
-                        responseText.textContent = "El Chef Baruch está ocupado. Intenta de nuevo en un momento.";
-                    }
-                }
-            };
-
-            await callApi();
+        function resetFilters() {
+            currentQuickFilter = 'todos';
+            document.querySelectorAll('.filter-tag').forEach(tag => {
+                tag.classList.toggle('active', tag.dataset.filter === 'todos');
+            });
+            document.getElementById('menu-search').value = "";
+            filterMenu();
         }
 
-        function clearChat() {
-            document.getElementById('user-mood').value = '';
-            document.getElementById('ai-response').classList.add('hidden');
+        function setService(type) {
+            currentService = type;
+            document.getElementById('tab-mesa').classList.toggle('active', type === 'mesa');
+            document.getElementById('tab-domicilio').classList.toggle('active', type === 'domicilio');
+            document.getElementById('input-mesa').classList.toggle('hidden', type !== 'mesa');
+            document.getElementById('input-domicilio').classList.toggle('hidden', type !== 'domicilio');
+            document.getElementById('mesa-val').classList.remove('error-border');
+            document.getElementById('domi-val').classList.remove('error-border');
+        }
+
+        function filterMenu() {
+            const searchTerm = document.getElementById('menu-search').value.toLowerCase();
+            const sections = document.querySelectorAll('.menu-section');
+            sections.forEach(section => {
+                let hasItems = false;
+                section.querySelectorAll('.menu-card, .drink-item').forEach(el => {
+                    const text = el.textContent.toLowerCase();
+                    const matchesSearch = text.includes(searchTerm);
+                    let matchesFilter = true;
+                    if (currentQuickFilter !== 'todos') {
+                        if (currentQuickFilter === 'tocineta') matchesFilter = text.includes('tocineta');
+                        else if (currentQuickFilter === 'especial') matchesFilter = text.includes('especial') || el.classList.contains('border-brand-red');
+                        else if (currentQuickFilter === 'pollo') matchesFilter = text.includes('pollo');
+                        else if (currentQuickFilter === 'picada') matchesFilter = section.id === 'picadas' || text.includes('picada');
+                        else if (currentQuickFilter === 'bebida') matchesFilter = section.id === 'bebidas';
+                        else if (currentQuickFilter === 'bbq') matchesFilter = text.includes('bbq') || text.includes('costilla');
+                    }
+                    const isVisible = matchesSearch && matchesFilter;
+                    el.style.display = isVisible ? 'flex' : 'none';
+                    if (isVisible) hasItems = true;
+                });
+                section.style.display = hasItems ? 'block' : 'none';
+            });
+        }
+
+        function setQuickFilter(filter, el) {
+            currentQuickFilter = filter;
+            document.querySelectorAll('.filter-tag').forEach(tag => tag.classList.remove('active'));
+            el.classList.add('active');
+            filterMenu();
+        }
+
+        function addToCart(name, price) {
+            if(cart[name]) cart[name].qty += 1;
+            else cart[name] = { price, qty: 1 };
+            updateCartUI();
+        }
+
+        function removeFromCart(name) {
+            if(cart[name]) {
+                cart[name].qty -= 1;
+                if(cart[name].qty <= 0) delete cart[name];
+            }
+            updateCartUI();
+            renderModalItems();
+        }
+
+        function deleteItem(name) {
+            delete cart[name];
+            updateCartUI();
+            renderModalItems();
+        }
+
+        function updateCartUI() {
+            const bar = document.getElementById('cart-bar');
+            const itemsCount = Object.values(cart).reduce((acc, item) => acc + item.qty, 0);
+            const total = Object.values(cart).reduce((acc, item) => acc + (item.price * item.qty), 0);
+            if (itemsCount > 0) {
+                bar.style.display = 'flex';
+                document.getElementById('cart-count').textContent = `${itemsCount} PRODUCTO${itemsCount > 1 ? 'S' : ''}`;
+                document.getElementById('cart-total').textContent = `$${total.toLocaleString()}`;
+                document.getElementById('modal-total').textContent = `$${total.toLocaleString()}`;
+                document.getElementById('modal-title').textContent = `Tu Pedido (${itemsCount})`;
+            } else { bar.style.display = 'none'; toggleCartModal(false); }
+        }
+
+        function clearCart() { cart = {}; updateCartUI(); }
+        function toggleCartModal(show) { document.getElementById('cart-modal').style.display = show ? 'flex' : 'none'; if(show) renderModalItems(); }
+
+        function renderModalItems() {
+            const list = document.getElementById('cart-items-list');
+            list.innerHTML = "";
+            for (const [name, data] of Object.entries(cart)) {
+                const row = document.createElement('div');
+                row.className = "flex justify-between items-center bg-white/5 p-3 border border-white/10 rounded";
+                row.innerHTML = `<div class="flex-1"><h4 class="text-xs font-bold text-white uppercase">${name}</h4><span class="text-[10px] text-brand-red">$${(data.price * data.qty).toLocaleString()}</span></div>
+                <div class="flex items-center gap-2"><button onclick="removeFromCart('${name}')" class="w-7 h-7 border border-white/20 rounded hover:bg-brand-red">-</button><span class="text-sm font-black">${data.qty}</span><button onclick="addToCart('${name}', ${data.price});renderModalItems();" class="w-7 h-7 border border-white/20 rounded hover:bg-brand-teal">+</button><button onclick="deleteItem('${name}')" class="ml-1 opacity-40 hover:opacity-100">🗑️</button></div>`;
+                list.appendChild(row);
+            }
+        }
+
+        function sendWhatsAppOrder() {
+            const nameInput = document.getElementById('client-name');
+            const mesaInput = document.getElementById('mesa-val');
+            const domiInput = document.getElementById('domi-val');
+            const name = nameInput.value.trim();
+            const notes = document.getElementById('order-notes').value.trim();
+            const mesa = mesaInput.value.trim();
+            const domi = domiInput.value.trim();
+
+            nameInput.classList.remove('error-border');
+            mesaInput.classList.remove('error-border');
+            domiInput.classList.remove('error-border');
+
+            let hasError = false;
+            if (!name) { nameInput.classList.add('error-border'); hasError = true; }
+            if (currentService === 'mesa' && !mesa) { mesaInput.classList.add('error-border'); hasError = true; }
+            if (currentService === 'domicilio' && !domi) { domiInput.classList.add('error-border'); hasError = true; }
+            
+            if (hasError || Object.keys(cart).length === 0) return;
+
+            let orderConsecutive = localStorage.getItem('baruch_order_count') || 0;
+            orderConsecutive = parseInt(orderConsecutive) + 1;
+            localStorage.setItem('baruch_order_count', orderConsecutive);
+            const formattedConsecutive = orderConsecutive.toString().padStart(4, '0');
+
+            const now = new Date();
+            const dateStr = now.toLocaleDateString('es-CO');
+            const timeStr = now.toLocaleTimeString('es-CO', { hour: '2-digit', minute: '2-digit' });
+
+            let loc = currentService === 'mesa' ? `📍 *Mesa:* ${mesa}` : `🛵 *Domicilio:* ${domi}`;
+            
+            let msg = `🍔 *PEDIDO #${formattedConsecutive} - BARUCH*\n`;
+            msg += `📅 *Fecha:* ${dateStr} | 🕒 *Hora:* ${timeStr}\n\n`;
+            msg += `👤 *CLIENTE:* ${name.toUpperCase()}\n${loc}\n`;
+            
+            if(notes) msg += `📝 *OBSERVACIONES:* ${notes}\n`;
+            msg += `\n*DETALLE DEL PEDIDO:*\n`;
+            for (const [pN, data] of Object.entries(cart)) { 
+                msg += `• *${data.qty}x* ${pN} ($${(data.price * data.qty).toLocaleString()})\n`; 
+            }
+            msg += `\n💰 *TOTAL A PAGAR: $${document.getElementById('modal-total').textContent}*`;
+
+            const waLink = `https://wa.me/573225838947?text=${encodeURIComponent(msg)}`;
+            const link = document.createElement('a');
+            link.href = waLink;
+            link.target = '_blank';
+            link.click();
         }
     </script>
 </body>
