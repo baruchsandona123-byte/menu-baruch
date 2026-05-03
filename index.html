@@ -196,7 +196,6 @@
             <a href="#costillas" class="nav-item" onclick="resetFilters()">Costillas</a>
             <a href="#pataches" class="nav-item" onclick="resetFilters()">Pataches</a>
             <a href="#bebidas" class="nav-item bg-brand-red text-white" onclick="resetFilters()">Bebidas</a>
-            <!-- BOTÓN MOVIDO AL FINAL DERECHO -->
             <a href="https://canva.link/fedqwung5mvpaq4" target="_blank" class="nav-item bg-orange-600 text-white border-orange-600">Almuerzos Domingos 🍲</a>
         </div>
     </nav>
@@ -210,15 +209,7 @@
                     <input type="text" id="menu-search" onkeyup="filterMenu()" placeholder="Buscar platos o ingredientes (ej: Tocineta, Queso, Carne)..." class="w-full bg-white/5 border border-white/10 p-5 rounded-sm text-sm focus:outline-none focus:border-brand-red transition-all pl-12 text-white">
                     <span class="absolute left-5 top-1/2 -translate-y-1/2 opacity-30">🔍</span>
                 </div>
-                <div class="flex gap-3 overflow-x-auto pb-2 scrollbar-hide">
-                    <button class="filter-tag active" data-filter="todos" onclick="setQuickFilter('todos', this)">Todo</button>
-                    <button class="filter-tag" data-filter="tocineta" onclick="setQuickFilter('tocineta', this)">🥓 Con Tocineta</button>
-                    <button class="filter-tag" data-filter="especial" onclick="setQuickFilter('especial', this)">⭐ Especiales</button>
-                    <button class="filter-tag" data-filter="pollo" onclick="setQuickFilter('pollo', this)">🍗 Pollo</button>
-                    <button class="filter-tag" data-filter="picada" onclick="setQuickFilter('picada', this)">👯 Para Compartir</button>
-                    <button class="filter-tag" data-filter="bebida" onclick="setQuickFilter('bebida', this)">🍹 Bebidas</button>
-                    <button class="filter-tag" data-filter="bbq" onclick="setQuickFilter('bbq', this)">🔥 BBQ</button>
-                </div>
+                
             </div>
         </section>
 
